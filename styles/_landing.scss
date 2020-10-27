@@ -1,0 +1,154 @@
+.landing {
+    height: 115vh;
+    overflow-x: hidden;
+	background: linear-gradient(
+			to bottom,
+			rgba($bleach, 1) 0%,
+			rgba($bleach, 0.65) 45%,
+			rgba($bleach, 0.55) 52.5%,
+			rgba($bleach, 0.63) 70%,
+			rgba($bleach, 1) 100%
+		),
+        url(/perishables.jpg);
+        
+    &--inner {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        grid-auto-rows: min-content;
+        width: 83.33%;
+        margin: auto;
+        padding-top: 180px;
+    }
+    &--title {
+        font-family: ambroise-firmin-std, serif;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 94px;
+
+        text-transform: uppercase;
+        color: $brown;
+        grid-column: 1/9;
+        grid-row: 1/2;
+
+    }
+    &--subtitle {
+        font-family: futura-pt, sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 54px;
+        grid-column: 2/9;
+        grid-row: 2/3;
+        
+        text-transform: capitalize;
+        color: $tomato;
+        text-align: right;
+    }
+    &--roles {
+        font-family: futura-pt-condensed, sans-serif;
+        font-weight: 500;
+        font-style: normal;
+        font-size: 30px;
+
+        text-transform: capitalize;
+        color: $brown;
+        grid-column: 4/9;
+        grid-row: 3/4;
+        text-align: right;
+
+    }
+
+    &--form {
+        display: flex;
+        justify-content: space-between;
+
+        &--wrapper {
+            position: relative;
+            transform: translateX(calc(100vw / 12));
+            grid-row: 4/5;
+            grid-column: 3/13;
+            background: linear-gradient(to right, rgba($tomato, 1) 0%, rgba($tomato, .85) 40%, rgba($tomato, 0) 95%);
+            // background-color: $tomato;
+            color: $bleach;
+            font-family: futura-pt, sans-serif;
+            font-weight: 500;
+            font-style: normal;
+            padding: 45px calc(100vw / 8) 45px 85px;
+            margin-top: 95px;
+            border-radius: 20px;
+
+            p {
+                text-transform: capitalize;
+                font-size: 23px;
+                margin-top: 10px;
+                font-weight: 400;
+            }
+        }
+
+        &--title {
+            text-transform: uppercase;
+            font-size: 30px;
+        }
+
+        &--options {
+            display: flex;
+            flex-wrap: wrap;
+            width: 43%;
+
+            button {
+                position: relative;
+                border: none;
+                background-color: $tomato;
+                font-family: futura-pt;
+                text-transform: capitalize;
+                color: $bleach;
+                font-size: 20px;
+                padding: 12.5px 40px;
+                margin: 5.5px;
+                border-radius: 14px;
+                cursor: pointer;
+                box-shadow: inset 0 -4px 12px rgba(black, .21);
+                outline: none;
+                transform: scale(1);
+                transition: all .075s ease-out;
+            }
+
+            .option__active {
+                box-shadow: 0 -4px 18px rgba(black, .21);
+                transform: scale(1.05);
+                transition: all .075s ease-in;
+                background-color: $bleach;
+                color: $tomato;
+            }
+        }
+        &--submit {
+            align-self: flex-end;
+
+            button {
+                position: relative;
+                border: none;
+                background-color: $bleach;
+                color: $tomato;
+                font-family: futura-pt;
+                text-transform: capitalize;
+                font-weight: 700;
+                font-size: 27px;
+                padding: 25px 50px;
+                border-radius: 7px;
+                box-shadow: 0 -6px 20px rgba($tomato, .21);
+                cursor: pointer;
+                outline: none;
+                transform: scale(1);
+                transition: transform .15s ease-in-out;
+
+                &:hover {
+                    transform: scale(1.025);
+                }
+
+                &:active {
+                    transform: scale(1.01);
+                }
+            }
+        }
+
+    }
+}

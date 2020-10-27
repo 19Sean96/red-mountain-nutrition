@@ -1,0 +1,35 @@
+.header {
+    position: absolute;
+    height: 95px;
+    top: 10px;
+    left: 0;
+    width: 100%;
+    &--inner {
+        height: 100%;
+        width: 90%;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+.logo {
+    height: 72.5%;
+    &--wrapper {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.nav {
+    a {
+        text-transform: capitalize;
+        text-decoration: none;
+        margin: 0 36.5px;
+        font-size: 23px;
+        color: $grass;
+    }
+}

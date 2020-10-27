@@ -1,0 +1,89 @@
+.packages {
+	text-align: center;
+	margin: 0 12.334vw 30px;
+	color: $brown;
+
+	&--title {
+		font-size: 72px;
+		font-family: ambroise-std, serif;
+		font-weight: 400;
+		font-style: normal;
+		text-transform: capitalize;
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+
+	&--subtitle {
+		font-size: 22px;
+		font-family: futura-pt, sans-serif;
+		font-weight: 500;
+		font-style: normal;
+		text-transform: capitalize;
+		max-width: 1200px;
+		margin: 20px auto 0;
+	}
+
+	&--options {
+		display: flex;
+		justify-content: space-between;
+		margin-top: 80px;
+	}
+}
+
+.package {
+	padding: 40px 80px;
+	border-radius: 10px;
+	color: $bleach;
+	&:nth-of-type(odd) {
+		background-color: $brown;
+	}
+	&:nth-of-type(even) {
+		background-color: $tomato;
+	}
+
+	&--title {
+		font-family: ambroise-firmin-std, serif;
+		font-weight: 600;
+		font-style: normal;
+		font-size: 73px;
+		text-transform: capitalize;
+	}
+
+	&--duration {
+		font-size: 28px;
+		font-family: futura-pt, sans-serif;
+		font-weight: 500;
+		font-style: normal;
+		text-transform: uppercase;
+	}
+
+	&--price {
+		font-size: 28px;
+		font-family: futura-pt, sans-serif;
+		font-weight: 300;
+		font-style: normal;
+	}
+
+	hr {
+		border: none;
+		height: 2px;
+		background-color: $bleach;
+		width: 140%;
+		position: relative;
+		left: 50%;
+		transform: translateX(-50%);
+		margin: 20px 0;
+	}
+	&--list {
+		list-style: none;
+
+		li {
+			font-size: 21px;
+			font-family: futura-pt, sans-serif;
+			font-weight: 500;
+			font-style: normal;
+            text-transform: capitalize;
+            margin: 21px 0;
+		}
+	}
+}
