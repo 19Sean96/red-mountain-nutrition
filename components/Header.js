@@ -1,7 +1,7 @@
 import Logo from './svg/logo-icon'
 import Link from 'next/link'
 
-export default () => {
+const Header = () => {
     return (
         <header className="header">
             <div className="header--inner">
@@ -28,3 +28,5 @@ export default () => {
         </header>
     )
 }
+
+export default Header

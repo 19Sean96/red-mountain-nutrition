@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 const LifestylePackages = (props) => {
 	return (
 		<section className="packages">
@@ -28,6 +30,18 @@ const LifestylePackages = (props) => {
 						<li>1 progress evaluation</li>
 						<li>2 Phone/Email Checkins</li>
 					</ul>
+					<Link href={{
+						pathname: "/schedule",
+						query: {
+							type: "jumpstart",
+							focus: null
+						}
+					}}
+						as="/schedule">
+						<a className="package--submit">
+							Sign Up
+						</a>
+					</Link>
 				</div>
 				<div className="package package__standard">
 					<h3 className="package--title">standard</h3>
@@ -40,6 +54,11 @@ const LifestylePackages = (props) => {
 						<li>1 progress evaluation</li>
 						<li>6 Phone/Email Checkins</li>
 					</ul>
+					<Link href="/">
+						<a className="package--submit">
+							Sign Up
+						</a>
+					</Link>
 				</div>
 				<div className="package package__premium">
 					<h3 className="package--title">premium</h3>
@@ -52,6 +71,11 @@ const LifestylePackages = (props) => {
 						<li>2 progress evaluations</li>
 						<li>8 Phone/Email Checkins</li>
 					</ul>
+					<Link href="/">
+						<a className="package--submit">
+							Sign Up
+						</a>
+					</Link>
 				</div>
 			</div>
 		</section>
