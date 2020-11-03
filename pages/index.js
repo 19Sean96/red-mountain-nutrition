@@ -1,6 +1,5 @@
 import Head from 'next/head'
-
-import Header from '../components/Header'
+import Interface from '../components/Interface'
 import Landing from '../components/Landing'
 import LifestylePackages from '../components/LifestylePackages'
 export default function Home() {
@@ -12,11 +11,10 @@ export default function Home() {
         <link rel="icon" href="/logo.ico" />
       </Head>
 
-      <main className="main">
-        <Header />
+      <Interface>
         <Landing />
         <LifestylePackages />
-      </main>
+      </Interface>
     </>
   )
 }

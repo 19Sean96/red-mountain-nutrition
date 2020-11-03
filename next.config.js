@@ -1,6 +1,6 @@
 const withSass = require("@zeit/next-sass");
-
-module.exports = withSass({
+const withCSS = require("@zeit/next-css")
+module.exports = withCSS(withSass({
 	webpack(config, options) {
 		config.module.rules.push({
 			test: /\.(jpg|jpeg|png|gif)$/,
@@ -14,4 +14,4 @@ module.exports = withSass({
 
 		return config;
 	},
-});
+}));

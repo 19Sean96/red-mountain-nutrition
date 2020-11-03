@@ -1,0 +1,290 @@
+.schedule {
+	padding-top: 180px;
+	min-height: 115vh;
+	overflow-x: hidden;
+	background: linear-gradient(
+			to bottom,
+			rgba($bleach, 1) 0%,
+			rgba($bleach, 0.65) 45%,
+			rgba($bleach, 0.55) 52.5%,
+			rgba($bleach, 0.63) 70%,
+			rgba($bleach, 1) 100%
+		),
+		url(/perishables.jpg);
+	background-size: cover;
+
+	&--title {
+		text-align: center;
+		font-family: ambroise-firmin-std, serif;
+		font-weight: 400;
+		font-style: normal;
+		font-size: 94px;
+
+		text-transform: capitalize;
+		color: $brown;
+	}
+	&--content {
+		background-color: rgba(white, 0.43);
+		width: 1200px;
+		margin: 25px auto 125px;
+		border-radius: 9px;
+		padding: 35px 125px;
+
+		&--title {
+			text-transform: capitalize;
+			font-family: futura-pt, sans-serif;
+			font-weight: 600;
+			font-style: normal;
+			font-size: 38px;
+			color: #7A4E35;
+		}
+
+		&__focus {
+            margin-bottom: 50px;
+			&--options {
+				button {
+					position: relative;
+					border: none;
+					font-family: futura-pt;
+                    text-transform: capitalize;
+                    
+					background-color: $brown;
+                    color: $bleach;
+                    opacity: .6;
+					font-size: 20px;
+					padding: 12.5px 40px;
+					margin: 10px 15px;
+					border-radius: 14px;
+					cursor: pointer;
+					box-shadow: inset 0 -4px 12px rgba(black, 0.27);
+					outline: none;
+					transform: scale(1);
+					transition: all 0.075s ease-out;
+
+					&::before {
+						position: absolute;
+						content: '';
+						top: 50%; left: 50%;
+						transform: translate(-50%,-50%);
+						width: calc(100% + 5px);
+						height: calc(100% + 5px);
+						border: 2px rgba($grass, 0) solid;
+						border-radius: 18px;
+						transition: all .1s;
+					}
+				}
+
+				.option__active {
+					box-shadow: 0 -4px 18px rgba(black, 0.21);
+					transform: scale(1.05);
+                    transition: all 0.075s ease-in;
+                    opacity: 1;
+					background-color: $bleach;
+					color: $brown;
+
+					&::before {
+						border-color: $grass;
+						transition: all .1s;
+					}
+				}
+			}
+        }
+        
+        &__packages {
+
+            &--options {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+
+            .option {
+				position: relative;
+                display: flex;
+				align-items: center;
+				border: none;
+				margin: 20px 10px;
+				border-radius: 10px;
+				box-shadow: 0 8px 19px rgba(black, .17);
+				cursor: pointer;
+                transform: scale(1);
+                transition: all .15s ease-in-out;
+				outline: none;
+
+				&::before {
+					position: absolute;
+					content: '';
+					top: 50%; left: 50%;
+					transform: translate(-50%,-50%);
+					width: calc(100% + 15px);
+					height: calc(100% + 15px);
+					border: 5px rgba($grass, 0) solid;
+					border-radius: 15px;
+					transition: all .1s;
+				}
+
+				&__active {
+                    transform: scale(1.025);
+					box-shadow: 0 8px 19px rgba($grass, .27);
+
+					&::before {
+						border-color: $grass;
+						transition: all .1s;
+					}
+				}
+
+                &:hover {
+                    transform: scale(1.025);
+                }
+
+                &:active {
+                    transform: scale(1.01);
+                }
+                hr {
+                    width: 80px;
+                    position: relative;
+					transform: rotate(90deg);
+					border: solid 2px $brown;
+                }
+
+                &--head {
+                    text-align: center;
+                    margin: auto;
+					// flex-grow: 1;
+					// width: 150px;
+					padding: 22px 33px;
+					position: relative;
+
+					&::before {
+						content: '';
+						position: absolute;
+						top: 50%;
+						right: 0;
+						height: 70%;
+						width: 2px;
+						background-color: $brown;
+						transform: translateY(-50%);
+					}
+
+					h4 {
+						font-family: ambroise-firmin-std, serif;
+						font-weight: 400;
+						font-style: normal;
+						font-size: 34px;
+						text-transform: capitalize;
+					}
+
+					h5 {
+						text-transform: capitalize;
+						font-family: futura-pt, sans-serif;
+						font-weight: 500;
+						font-style: normal;
+						font-size: 25px;
+					}
+                }
+                &--body {
+					flex-grow: 2;
+					text-align: left;
+					padding-left: 15px;
+
+					p {
+						font-family: futura-pt, sans-serif;
+						font-weight: 400;
+						font-style: normal;
+						font-size: 19px;
+						text-transform: capitalize;
+					}
+
+					ul {
+						list-style: none;
+						display: flex;
+						flex-wrap: wrap;
+						li {
+							width: 45%;
+							font-family: ambroise-firmin-std, serif;
+							font-weight: 800;
+							font-style: normal;
+							font-size: 21px;
+							text-transform: capitalize;
+						}
+					}
+				}
+				
+				&__initial,
+                &__follow-up {
+					width: 35%;
+					color: $brown;
+					ul li {
+						width: 100%;
+					}
+                }
+                &__jumpstart,
+                &__standard,
+                &__premium {
+                    width: 60%;
+                }
+
+                &__initial {
+                    order: 1;
+                }
+                &__jumpstart {
+					order: 2;
+					background-color: $bleach;
+					color: $tomato;
+
+					.option--head::before {
+						background-color: $tomato;
+					}
+                }
+                &__follow-up {
+                    order: 3;
+                }
+                &__standard {
+					order: 4;
+					background-color: $tomato;
+					color: $bleach;
+
+					.option--head::before {
+						background-color: $bleach;
+					}
+                }
+                &__premium {
+                    order: 5;
+					margin-left: auto;
+					
+					background-color: $brown;
+					color: $bleach;
+
+					.option--head::before {
+						background-color: $bleach;
+					}
+                }
+
+            }
+		}
+		
+		&__confirm {
+			margin-top: 50px;
+			margin-bottom: 25px;
+			display: block;
+			text-align: center;
+			text-transform: capitalize;
+			text-decoration: underline;
+			color: #7A4E35;
+			font-family: futura-pt, sans-serif;
+			font-weight: 600;
+			font-style: normal;
+			font-size: 24px;
+			cursor: pointer;
+		}
+    }
+	
+	&--calendar {
+		&--content {
+			display: flex;
+			justify-content: space-around;
+		}
+	}
+
+}
+

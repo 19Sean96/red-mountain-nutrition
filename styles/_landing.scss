@@ -10,6 +10,7 @@
 			rgba($bleach, 1) 100%
 		),
         url(/perishables.jpg);
+    background-size: cover;
         
     &--inner {
         display: grid;
@@ -123,7 +124,9 @@
         &--submit {
             align-self: flex-end;
 
-            button {
+            a {
+                display: block;
+                text-decoration: none;
                 position: relative;
                 border: none;
                 background-color: $bleach;

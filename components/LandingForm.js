@@ -1,5 +1,7 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 import styled from 'styled-components';
+import Link from 'next/link'
+import { CartContext } from "./context";
 
 const StyledBtn = styled.button`
     box-shadow: inset 0 -4px 12px rgba(black, .21);
@@ -7,11 +9,23 @@ const StyledBtn = styled.button`
 `
 
 const LandingForm = (props) => {
-	const [activeCat, setActiveCat] = useState({
-		nutrition: false,
-		diabetes: false,
-		weightLoss: true,
-	});
+    const { activeFocus, setActiveFocus } = useContext(CartContext);
+    
+    const [catArr, setCatArr] = useState([
+
+    ])
+
+    useEffect(() => {
+        const { nutrition, diabetes, weightLoss } = activeFocus
+        setCatArr(() => {
+            let arr = []
+            nutrition && arr.push('nutrition')
+            diabetes && arr.push('diabetes')
+            weightLoss && arr.push('weightLoss')
+
+            return arr
+        })
+    }, [activeFocus])
 
 	return (
 		<section className="landing--form--wrapper">
@@ -23,36 +37,36 @@ const LandingForm = (props) => {
 			<div className="landing--form">
 				<div className="landing--form--options">
 					<button
-						className={`option--nutrition ${activeCat.nutrition && "option__active"}`}
+						className={`option--nutrition ${activeFocus.nutrition && "option__active"}`}
 						onClick={(e) =>
-							setActiveCat({
-								nutrition: !activeCat.nutrition,
-                                diabetes: activeCat.diabetes,
-                                weightLoss:  activeCat.weightLoss
+							setActiveFocus({
+								nutrition: !activeFocus.nutrition,
+                                diabetes: activeFocus.diabetes,
+                                weightLoss:  activeFocus.weightLoss
 							})
                         }
 					>
 						nutrition
 					</button>
 					<button
-						className={`option--diabetes ${activeCat.diabetes && "option__active"}`}
+						className={`option--diabetes ${activeFocus.diabetes && "option__active"}`}
                         onClick={(e) =>
-							setActiveCat({
-								nutrition: activeCat.nutrition,
-                                diabetes: !activeCat.diabetes,
-                                weightLoss:  activeCat.weightLoss
+							setActiveFocus({
+								nutrition: activeFocus.nutrition,
+                                diabetes: !activeFocus.diabetes,
+                                weightLoss:  activeFocus.weightLoss
 							})
 						}
 					>
 						diabetes
 					</button>
 					<button
-						className={`option--weight-loss ${activeCat.weightLoss && "option__active"}`}
+						className={`option--weight-loss ${activeFocus.weightLoss && "option__active"}`}
                         onClick={(e) =>
-							setActiveCat({
-								nutrition: activeCat.nutrition,
-                                diabetes: activeCat.diabetes,
-                                weightLoss: !activeCat.weightLoss
+							setActiveFocus({
+								nutrition: activeFocus.nutrition,
+                                diabetes: activeFocus.diabetes,
+                                weightLoss: !activeFocus.weightLoss
 							})
 						}
 					>
@@ -60,7 +74,16 @@ const LandingForm = (props) => {
 					</button>
 				</div>
 				<div className="landing--form--submit">
-					<button>schedule consultation</button>
+                    <Link 
+                        href={{
+                            pathname: "/schedule",
+                            query: {
+                                type: null,
+                                focus: catArr
+                            }
+                        }}
+                        as="/schedule"
+                    ><a>schedule consultation</a></Link>
 				</div>
 			</div>
 		</section>

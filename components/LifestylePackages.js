@@ -37,7 +37,8 @@ const LifestylePackages = (props) => {
 							focus: null
 						}
 					}}
-						as="/schedule">
+						as="/schedule"
+                        >
 						<a className="package--submit">
 							Sign Up
 						</a>
@@ -54,7 +55,15 @@ const LifestylePackages = (props) => {
 						<li>1 progress evaluation</li>
 						<li>6 Phone/Email Checkins</li>
 					</ul>
-					<Link href="/">
+					<Link href={{
+						pathname: "/schedule",
+						query: {
+							type: "standard",
+							focus: null
+						}
+					}}
+						as="/schedule"
+                        >
 						<a className="package--submit">
 							Sign Up
 						</a>
@@ -71,7 +80,15 @@ const LifestylePackages = (props) => {
 						<li>2 progress evaluations</li>
 						<li>8 Phone/Email Checkins</li>
 					</ul>
-					<Link href="/">
+					<Link href={{
+						pathname: "/schedule",
+						query: {
+							type: "premium",
+							focus: null
+						}
+					}}
+						as="/schedule"
+                        >
 						<a className="package--submit">
 							Sign Up
 						</a>
