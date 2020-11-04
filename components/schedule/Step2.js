@@ -22,7 +22,7 @@ const Step2 = (props) => {
 
 		console.log(date.toString());
 		let month = date.getMonth()
-		let day = date.getDay()
+		let day = date.getDate()
 		console.log(month, day);
 
 		let availableTimes = data.months[month].days[day]
@@ -53,7 +53,7 @@ const Step2 = (props) => {
 						Available times on {date.toDateString()}
 					</h3>
 					<ul className="calendar--times--list">
-						{times.map(time => (
+						{times && times.map(time => (
 							<li>
 								<button>{time.time} {time.suffix}</button>
 							</li>
@@ -61,7 +61,7 @@ const Step2 = (props) => {
 					</ul>
 				</div>
 			</div>
-			<a className="schedule--content__confirm" onClick={e => props.setStep(2)}>
+			<a className="schedule--content__confirm" onClick={e => props.setStep(3)}>
 				confirm & schedule appointment
 			</a>
 		</>
