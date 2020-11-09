@@ -1,8 +1,11 @@
 import Head from 'next/head'
 import Interface from '../components/Interface'
 import Landing from '../components/Landing'
-import LifestylePackages from '../components/LifestylePackages'
-export default function Home() {
+import LifestylePackages from '../components/LifestylePackages' 
+
+import { connectToDatabase } from '../util/mongodb'
+
+export default function Home({ isConnected }) {
   return (
     <>
       <Head>
@@ -17,4 +20,14 @@ export default function Home() {
       </Interface>
     </>
   )
+}
+
+export async function getServerSideProps(context) {
+  const { client } = await connectToDatabase()
+
+  const isConnected = await client.isConnected() // Returns true or false
+
+  return {
+    props: { isConnected },
+  }
 }
