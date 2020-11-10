@@ -1,9 +1,12 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
 import Interface from "../../components/Interface";
 import { useForm } from "react-hook-form";
 import { connectToDatabase } from "../../util/mongodb";
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 export default function Admin({ isConnected }) {
+	const router = useRouter()
+	console.log(router);
     const { register, handleSubmit } = useForm();
     const [loggedIn, logIn] = useState(false)
     const [activeLogInType, setActiveLogInType] = useState('logIn')
@@ -17,12 +20,24 @@ export default function Admin({ isConnected }) {
             method: 'POST',
             headers: { 'Content-Type': 'application/json'},
             body: JSON.stringify(body)
-        })
-        if (res.status === 200) {
-            const userObj = await res.json();
-            logIn(userObj)
-        }
-    }
+		})
+		const response = await res.json()
+		console.log(response);
+		response.loggedIn ? logIn(true) : alert(response.message)
+	}
+	
+	useEffect(() => {
+		console.log("log in status has changed");
+
+		if (loggedIn) {
+			router.push({
+				pathname: '/admin/account',
+				query: {
+					name: "Jeff"
+				}
+			}, '/admin/account' )
+		}
+	}, [loggedIn])
 	return (
 		<>
 			<Head>

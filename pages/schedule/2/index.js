@@ -1,14 +1,13 @@
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import Head from "next/head";
-import { CartContext } from "../../components/context";
+import { CartContext } from "../../../components/context";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import data from "../../schedule-data";
+import data from "../../../schedule-data";
 
 import Interface from "../../../components/Interface";
-import Step1 from "../../../components/schedule/Step1";
-import Step2 from "../../../components/schedule/Step2";
+
 
 export default function Schedule() {
   const router = useRouter();
