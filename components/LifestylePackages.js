@@ -31,13 +31,13 @@ const LifestylePackages = (props) => {
 						<li>2 Phone/Email Checkins</li>
 					</ul>
 					<Link href={{
-						pathname: "/schedule",
+						pathname: "/schedule/1",
 						query: {
 							type: "jumpstart",
 							focus: null
 						}
 					}}
-						as="/schedule"
+						as="/schedule/1"
                         >
 						<a className="package--submit">
 							Sign Up
@@ -56,13 +56,13 @@ const LifestylePackages = (props) => {
 						<li>6 Phone/Email Checkins</li>
 					</ul>
 					<Link href={{
-						pathname: "/schedule",
+						pathname: "/schedule/1",
 						query: {
 							type: "standard",
 							focus: null
 						}
 					}}
-						as="/schedule"
+						as="/schedule/1"
                         >
 						<a className="package--submit">
 							Sign Up
@@ -81,13 +81,13 @@ const LifestylePackages = (props) => {
 						<li>8 Phone/Email Checkins</li>
 					</ul>
 					<Link href={{
-						pathname: "/schedule",
+						pathname: "/schedule/1",
 						query: {
 							type: "premium",
 							focus: null
 						}
 					}}
-						as="/schedule"
+						as="/schedule/1"
                         >
 						<a className="package--submit">
 							Sign Up

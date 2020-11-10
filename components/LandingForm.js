@@ -76,13 +76,13 @@ const LandingForm = (props) => {
 				<div className="landing--form--submit">
                     <Link 
                         href={{
-                            pathname: "/schedule",
+                            pathname: "/schedule/1",
                             query: {
                                 type: null,
                                 focus: catArr
                             }
                         }}
-                        as="/schedule"
+                        as="/schedule/1"
                     ><a>schedule consultation</a></Link>
 				</div>
 			</div>

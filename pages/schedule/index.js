@@ -21,18 +21,7 @@ export default function Schedule() {
 				<link rel="icon" href="/logo.ico" />
 			</Head>
 
-			<Interface>
-				<section className="schedule">
-					<h1 className="schedule--title">
-						let's get you scheduled.
-					</h1>
-					<div className="schedule--content">
-						{ step === 1 && <Step1 setStep={setStep}/> }
-						{ step === 2 && <Step2 setStep={setStep}/> }
-					</div>
 
-				</section>
-			</Interface>
 		</>
 	);
 }
