@@ -9,8 +9,6 @@ import Interface from "../../../components/Interface";
 export default function Schedule() {
 	const router = useRouter();
 	const {
-		cart,
-		setCart,
 		activeFocus,
 		setActiveFocus,
 		activePackage,
@@ -18,10 +16,7 @@ export default function Schedule() {
 	} = useContext(CartContext);
 
 	useEffect(() => {
-		setCart({
-			focus: router.query.focus,
-			type: router.query.type,
-		});
+
 	}, []);
 
 	useEffect(() => {
@@ -30,10 +25,7 @@ export default function Schedule() {
 		activeFocus.diabetes && focusArr.push("diabetes");
 		activeFocus.nutrition && focusArr.push("nutrition");
 		activeFocus.weightLoss && focusArr.push("weightLoss");
-		setCart({
-			focus: focusArr,
-			type: router.query.type,
-		});
+
 	}, [activeFocus]);
 
 	return (
@@ -111,11 +103,14 @@ export default function Schedule() {
 							<div className="schedule--content__packages--options">
 								<button
 									className={`option option__initial ${
-										activePackage === "initial"
+										activePackage.name === "initial"
 											? "option__active"
 											: ""
 									}`}
-									onClick={() => setActivePackage("initial")}
+									onClick={() => setActivePackage({
+										name: 'initial',
+										price: 9900
+									})}
 								>
 									<div className="option--head">
 										<h4 className="option--name">
@@ -132,12 +127,15 @@ export default function Schedule() {
 								</button>
 								<button
 									className={`option option__follow-up ${
-										activePackage === "follow-up"
+										activePackage.name === "follow-up"
 											? "option__active"
 											: ""
 									}`}
 									onClick={() =>
-										setActivePackage("follow-up")
+										setActivePackage({
+											name: 'follow-up',
+											price: 7900
+										})
 									}
 								>
 									<div className="option--head">
@@ -155,12 +153,15 @@ export default function Schedule() {
 								</button>
 								<button
 									className={`option option__jumpstart ${
-										activePackage === "jumpstart"
+										activePackage.name === "jumpstart"
 											? "option__active"
 											: ""
 									}`}
 									onClick={() =>
-										setActivePackage("jumpstart")
+										setActivePackage({
+											name: 'jumpstart',
+											price: 24900
+										})
 									}
 								>
 									<div className="option--head">
@@ -181,11 +182,14 @@ export default function Schedule() {
 								</button>
 								<button
 									className={`option option__standard ${
-										activePackage === "standard"
+										activePackage.name === "standard"
 											? "option__active"
 											: ""
 									}`}
-									onClick={() => setActivePackage("standard")}
+									onClick={() => setActivePackage({
+										name: 'standard',
+										price: 43900
+									})}
 								>
 									<div className="option--head">
 										<h4 className="option--name">
@@ -205,11 +209,14 @@ export default function Schedule() {
 								</button>
 								<button
 									className={`option option__premium ${
-										activePackage === "premium"
+										activePackage.name === "premium"
 											? "option__active"
 											: ""
 									}`}
-									onClick={() => setActivePackage("premium")}
+									onClick={() => setActivePackage({
+										name: 'premium',
+										price: 79900
+									})}
 								>
 									<div className="option--head">
 										<h4 className="option--name">

@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useRef, createRef } from "react";
 import Head from "next/head";
 import { CartContext } from "../../../components/context";
 import Calendar from "react-calendar";
@@ -11,20 +11,19 @@ import Interface from "../../../components/Interface";
 
 export default function Schedule() {
   const router = useRouter();
+  const [buttonRefs, setButtonRefs] = useState([])
   const {
-    cart,
-    setCart,
-    activeFocus,
-    setActiveFocus,
-    activePackage,
-    setActivePackage,
+    handleCheckoutEnter,
+    activeTime,
+    setActiveTime
   } = useContext(CartContext);
   const [date, setDate] = useState(new Date());
-  const [times, setTimes] = useState(null);
+  const [times, setTimes] = useState([]);
   const onChange = (date) => {
     console.log(date);
     setDate(date);
   };
+
 
   useEffect(() => {
     console.log(
@@ -37,12 +36,36 @@ export default function Schedule() {
     console.log(month, day);
 
     let availableTimes = data.months[month].days[day];
-    console.log(availableTimes);
 
-    setTimes(availableTimes.times);
+    setTimes(() => {
+      let arr = []
+      availableTimes.times.map(time => {
+        time.active = false
+        arr.push(time)
+      })
+      return arr
+    });
+
   }, [date]);
 
-  console.log(data);
+  useEffect(() => {
+    const timesLength = times && times.length
+    console.log(timesLength);
+
+    if (timesLength) {
+      setButtonRefs(buttonRefs => (
+        Array(timesLength).fill().map((_, i) => buttonRefs[i] || createRef())
+      ))
+    }
+  }, [times])
+
+  useEffect(() => {
+    if (activeTime) {
+      activeTime.active = true
+    }
+  }, [activeTime])
+
+  // console.log(data);
   return (
     <>
       <Head>
@@ -70,9 +93,16 @@ export default function Schedule() {
                 </h3>
                 <ul className="calendar--times--list">
                   {times &&
-                    times.map((time) => (
+                    times.map((time, i) => (
                       <li>
-                        <button>
+                        <button 
+                          key={i} 
+                          className={`time__button ${(activeTime.time === time.time && activeTime.suffix === time.suffix) ? 'active' : ''}`} 
+                          ref={buttonRefs[i]} 
+                          onClick={e => {
+                          console.log(buttonRefs[i].current.active);
+                          setActiveTime(time)
+                        }}>
                           {time.time} {time.suffix}
                         </button>
                       </li>
@@ -82,9 +112,9 @@ export default function Schedule() {
             </div>
             <a
               className="schedule--content__confirm"
-              onClick={(e) => props.setStep(3)}
+              onClick={handleCheckoutEnter}
             >
-              confirm & schedule appointment
+              confirm & make payment
             </a>
           </div>
         </section>
