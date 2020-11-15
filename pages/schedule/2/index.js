@@ -39,7 +39,7 @@ export default function Schedule() {
 
     setTimes(() => {
       let arr = []
-      availableTimes.times.map(time => {
+      availableTimes && availableTimes.times.map(time => {
         time.active = false
         arr.push(time)
       })

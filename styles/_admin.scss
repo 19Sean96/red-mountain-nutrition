@@ -2,6 +2,7 @@
 
     &--title {
         text-align: center;
+        margin-top: 50px;
     }
 
     &--form {
@@ -16,4 +17,21 @@
             padding: 10px;
         }
     }
+
+    &--body {
+        width: 91.7%;
+        margin: 40px auto;
+        display: flex;
+        justify-content: space-around;
+    }
+
+
 }
+
+
+
+
+
+
+
+

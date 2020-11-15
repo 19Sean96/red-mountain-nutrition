@@ -28,6 +28,8 @@ export default ({ children }) => {
 
 	const [ activeStep, setActiveStep ] = useState()
 
+	const [ user, setUser] = useState()
+
 	useEffect(() => {
 		console.log(router);
 
@@ -73,7 +75,9 @@ export default ({ children }) => {
 				activeStep,
 				activeTime,
 				setActiveTime,
-                handleCheckoutEnter
+				handleCheckoutEnter,
+				user,
+				setUser
 			}}
 		>
 			{children}

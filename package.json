@@ -24,6 +24,7 @@
     "passport-local": "^1.0.0",
     "react": "17.0.1",
     "react-calendar": "^3.1.0",
+    "react-datetime-picker": "^3.0.4",
     "react-dom": "17.0.1",
     "react-hook-form": "^6.10.1",
     "stripe": "^8.121.0",

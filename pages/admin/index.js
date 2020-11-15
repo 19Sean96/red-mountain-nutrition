@@ -3,10 +3,13 @@ import { useRouter } from "next/router";
 import Interface from "../../components/Interface";
 import { useForm } from "react-hook-form";
 import { connectToDatabase } from "../../util/mongodb";
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import {CartContext} from '../../components/context'
+
 export default function Admin({ isConnected }) {
 	const router = useRouter()
 	console.log(router);
+	const { user, setUser } = useContext(CartContext)
     const { register, handleSubmit } = useForm();
     const [loggedIn, logIn] = useState(false)
     const [activeLogInType, setActiveLogInType] = useState('logIn')
@@ -22,8 +25,15 @@ export default function Admin({ isConnected }) {
             body: JSON.stringify(body)
 		})
 		const response = await res.json()
-		console.log(response);
-		response.loggedIn ? logIn(true) : alert(response.message)
+
+		if (response.loggedIn) {
+			setUser(response.name)
+			logIn(true)
+		} else {
+			logIn(false)
+			alert('That information is incorrect.')
+		}
+
 	}
 	
 	useEffect(() => {
@@ -32,9 +42,6 @@ export default function Admin({ isConnected }) {
 		if (loggedIn) {
 			router.push({
 				pathname: '/admin/account',
-				query: {
-					name: "Jeff"
-				}
 			}, '/admin/account' )
 		}
 	}, [loggedIn])
@@ -50,14 +57,7 @@ export default function Admin({ isConnected }) {
 			</Head>
 
 			<Interface>
-				{isConnected ? (
-					<h2 className="subtitle">You are connected to MongoDB</h2>
-				) : (
-					<h2 className="subtitle">
-						You are NOT connected to MongoDB. Check the{" "}
-						<code>README.md</code> for instructions.
-					</h2>
-				)}
+
                 <h1 className="admin--title">{activeLogInType === "logIn" ? 'Log In With Your Credentials' : 'Sign Up To Receive Credentials'}</h1>
 				<form
 					className="admin--form"
