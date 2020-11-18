@@ -10,7 +10,7 @@ const stripePromise = loadStripe(
 
 export const CartContext = createContext(null);
 
-export default ({ children }) => {
+export default function Provider ({ children }) {
 	const router = useRouter();
 
 	const [activeFocus, setActiveFocus] = useState({
@@ -20,7 +20,7 @@ export default ({ children }) => {
 	});
 
 	const [activeTime, setActiveTime] = useState()
-
+	const [checkoutSessionID, setCheckoutSessionId] = useState()
 	const [activePackage, setActivePackage] = useState({
 		name: 'standard',
 		price: 43900
@@ -31,11 +31,11 @@ export default ({ children }) => {
 	const [ user, setUser] = useState()
 
 	useEffect(() => {
-		console.log(router);
 
 		if (router.pathname.includes('/schedule/')) {
 			setActiveStep(router.pathname.replace('/schedule/', ''))
 		}
+
 	}, [router ])
 
 
@@ -55,14 +55,17 @@ export default ({ children }) => {
         });
     
         const session = await response.json();
-    
         const result = await stripe.redirectToCheckout({
             sessionId: session.id,
         });
+
+		setCheckoutSessionId(result)
     
         if (result.error) {
             alert(result.error.message);
         }
+
+		
     };
     
 	return (
@@ -77,7 +80,8 @@ export default ({ children }) => {
 				setActiveTime,
 				handleCheckoutEnter,
 				user,
-				setUser
+				setUser,
+				checkoutSessionID,
 			}}
 		>
 			{children}
