@@ -25,10 +25,10 @@
 	}
 	&--content {
 		background-color: rgba(white, 0.43);
-		width: 1200px;
 		margin: 25px auto 125px;
 		border-radius: 9px;
-		padding: 35px 125px;
+		padding: 35px 75px;
+		width: min-content;
 
 		&--title {
 			text-transform: capitalize;
@@ -279,6 +279,100 @@
 		}
 	}
 
+	&--modal {
+		position: fixed;
+		bottom: 100px;
+		right: 100px;
+		background-color: rgba($bleach, 0.85);
+		width: 450px;
+		// display: flex;
+		// flex-direction: column;
+		// justify-content: right;
+		&--title {
+			text-align: center;
+			padding: 20px 0 10px;
+			// position: absolute;
+			// top: 0;
+			// left: 0;
+			// width: 100%;
+		}
+		
+
+
+		&--list {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			max-height: 300px;
+			min-height: 100px;
+			overflow-y: scroll;
+
+			p {
+				text-align: center;
+				width: 100%;
+			}
+			li {
+				text-decoration: none;
+				list-style: none;
+				width: 100%;
+				button {
+					width: 60%;
+					display: block;
+					position: relative;
+					border: none;
+					background-color: $bleach;
+					color: $tomato;
+					font-family: futura-pt;
+					text-transform: capitalize;
+					font-weight: 700;
+					font-size: 17px;
+					padding: 12px 28px;
+					margin: 10px auto;
+					border-radius: 7px;
+					box-shadow: 0 -6px 20px rgba($tomato, 0.21);
+					cursor: pointer;
+					outline: none;
+					transform: scale(1);
+					transition: transform 0.15s ease-in-out;
+
+					&::before {
+						position: absolute;
+						content: "";
+						top: 50%;
+						left: 50%;
+						transform: translate(-50%, -50%);
+						width: calc(100% + 5px);
+						height: calc(100% + 5px);
+						border: 2px rgba($grass, 0) solid;
+						border-radius: 10px;
+						transition: all 0.1s;
+					}
+
+					&:hover {
+						transform: scale(1.025);
+					}
+
+					&:active {
+						transform: scale(1.01);
+					}
+				}
+				.active {
+					box-shadow: 0 -4px 18px rgba(black, 0.21);
+					transform: scale(1.05);
+					transition: all 0.075s ease-in;
+					opacity: 1;
+					background-color: $brown;
+					color: $bleach;
+
+					&::before {
+						border-color: $grass;
+						transition: all 0.1s;
+					}
+				}
+			}
+		}
+	}
+
 	&--calendar {
 		&--title {
 			text-transform: capitalize;
@@ -295,85 +389,10 @@
 			align-items: stretch;
 			.calendar {
 				&--dates {
-					width: 50%;
+					width: 100%;
 					display: flex;
 					justify-content: center;
 					align-items: center;
-				}
-				&--times {
-					width: 50%;
-					display: flex;
-					flex-direction: column;
-					justify-content: space-between;
-					&--title {
-						text-align: center;
-					}
-					&--list {
-						display: flex;
-						flex-wrap: wrap;
-						align-items: flex-start;
-
-						li {
-							text-decoration: none;
-							list-style: none;
-							width: 100%;
-							button {
-								width: 60%;
-								display: block;
-								position: relative;
-								border: none;
-								background-color: $bleach;
-								color: $tomato;
-								font-family: futura-pt;
-								text-transform: capitalize;
-								font-weight: 700;
-								font-size: 17px;
-								padding: 12px 28px;
-								margin: 10px auto;
-								border-radius: 7px;
-								box-shadow: 0 -6px 20px rgba($tomato, 0.21);
-								cursor: pointer;
-								outline: none;
-								transform: scale(1);
-								transition: transform 0.15s ease-in-out;
-
-								&::before {
-									position: absolute;
-									content: "";
-									top: 50%;
-									left: 50%;
-									transform: translate(-50%, -50%);
-									width: calc(100% + 5px);
-									height: calc(100% + 5px);
-									border: 2px rgba($grass, 0) solid;
-									border-radius: 10px;
-									transition: all 0.1s;
-								}
-
-								&:hover {
-									transform: scale(1.025);
-								}
-
-								&:active {
-									transform: scale(1.01);
-								}
-
-							}
-							.active {
-								box-shadow: 0 -4px 18px rgba(black, 0.21);
-								transform: scale(1.05);
-								transition: all 0.075s ease-in;
-								opacity: 1;
-								background-color: $brown;
-								color: $bleach;
-			
-								&::before {
-									border-color: $grass;
-									transition: all 0.1s;
-								}
-							}
-						}
-					}
 				}
 			}
 		}
@@ -382,15 +401,14 @@
 
 .react-calendar {
 	height: 100%;
+	min-width: 600px;
 	width: 100% !important;
 	padding: 15px;
 	border-radius: 10px;
 	border: none !important;
 	background-color: $bleach !important;
-	box-shadow: 0 5px 15px rgba(black, .26);
+	box-shadow: 0 5px 15px rgba(black, 0.26);
 	&__navigation {
-
-
 		button {
 			font-family: futura-pt !important;
 			font-family: ambroise-firmin-std, serif !important;
@@ -402,7 +420,6 @@
 	}
 
 	&__viewContainer {
-
 	}
 
 	&__month-view {
@@ -425,6 +442,5 @@
 				font-size: 16px !important;
 			}
 		}
-
 	}
 }

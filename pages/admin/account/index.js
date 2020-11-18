@@ -4,7 +4,7 @@ import Interface from "../../../components/Interface";
 import { connectToDatabase } from "../../../util/mongodb";
 import { useState, useEffect, useContext } from "react";
 import { CartContext } from "../../../components/context";
-import DateTimePicker from "react-datetime-picker/dist/entry.nostyle";
+import DateTimePicker from "react-datetime-picker";
 import "react-calendar/dist/Calendar.css";
 import "react-clock/dist/Clock.css";
 import "react-datetime-picker/dist/DateTimePicker.css";

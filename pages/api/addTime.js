@@ -14,7 +14,7 @@ export default async (req, res) => {
 
 
 
-    valid = existingTimesForDay.every(time => Math.abs(time.time - req.body.time) >= 7200000)
+    valid = existingTimesForDay.every(time => Math.abs(time.time - req.body.time) >= 3600000)
     console.log(valid ? "THE TIME IS VALID" : "THE TIME IS NOT VALID");
     valid && db.collection('schedule_open').insertOne(req.body)
 

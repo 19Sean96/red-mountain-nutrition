@@ -44,8 +44,8 @@ export default async (req,res) => {
             }
         ],
         mode: 'payment',
-        success_url: 'https://redmountainnutrition.com/success',
-        cancel_url: 'https://redmountainnutrition.com/cancel'
+        success_url: 'http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID}',
+        cancel_url: 'http://localhost:3000/cancel'
     });
     res.statusCode = 200;
     res.json({ id: session.id })
