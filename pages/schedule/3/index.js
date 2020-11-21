@@ -9,11 +9,10 @@ import NumberFormat from "react-number-format";
 
 const emailIsValid = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 const phoneIsValid = (phone) => /^\(\d{3}\)\s\d{3}-\d{4}/.test(phone);
-
 export default function Schedule() {
 	const { register, watch, control } = useForm();
 	const watchInputs = watch();
-
+	const [nameValid, validateName] = useState(false)
 	const [emailValid, validateEmail] = useState(false);
 	const [phoneValid, validatePhone] = useState(false);
 	const [fullyValidated, fullyValidate] = useState(false);
@@ -22,7 +21,8 @@ export default function Schedule() {
 		console.log(watchInputs);
 		validateEmail(emailIsValid(watchInputs.custEmail));
 		validatePhone(phoneIsValid(watchInputs.custPhone));
-		fullyValidate(emailValid && phoneValid);
+		watchInputs?.custName && validateName(() => (watchInputs.custName.length > 1))
+		fullyValidate(emailValid && phoneValid && nameValid);
 	}, [watchInputs]);
 
 	return (
@@ -50,7 +50,7 @@ export default function Schedule() {
 								Enter Your Contact Info.
 							</h2>
 							<form className="schedule--customer--form">
-								<div className="schedule--customer__name input__wrapper">
+								<div className={`schedule--customer__name input__wrapper ${nameValid ? 'valid' : watchInputs?.custName?.length > 0 ? 'invalid' : ''}`}>
 									<input
 										type="text"
 										name="custName"
@@ -60,7 +60,7 @@ export default function Schedule() {
 									/>
 									<label htmlFor="custName">Name:</label>
 								</div>
-								<div className="schedule--customer__email input__wrapper">
+								<div className={`schedule--customer__email input__wrapper ${emailValid ? 'valid' : watchInputs?.custEmail?.length > 0 ? 'invalid' : ''}`}>
 									<input
 										type="email"
 										name="custEmail"
@@ -71,7 +71,7 @@ export default function Schedule() {
 									<label htmlFor="custEmail">Email:</label>
 								</div>
 
-								<div className="schedule--customer__phone input__wrapper">
+								<div className={`schedule--customer__phone input__wrapper ${phoneValid ? 'valid' : watchInputs?.custPhone?.length > 0 ? 'invalid' : ''}`}>
 									<Controller
 										control={control}
 										name="custPhone"

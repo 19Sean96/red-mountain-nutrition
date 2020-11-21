@@ -1,7 +1,7 @@
 import { CartContext } from "../context";
 import { useState, useEffect, useContext } from "react";
 import Link from "next/link";
-export default function StepCounter({ watchCustInputs }) {
+export default function StepCounter({ watchCustInputs, validated }) {
 	const stepInfo = [
 		{
 			num: 1,
@@ -56,7 +56,7 @@ export default function StepCounter({ watchCustInputs }) {
 					) : (
 						<a onClick={e => {
                             console.log(watchCustInputs)
-                            handleCheckoutEnter(e, watchCustInputs)
+                            validated ? handleCheckoutEnter(e, watchCustInputs) : alert('Please enter all required information')
                         }}>
 							<span>
 								{stepInfo[activeStep].num +

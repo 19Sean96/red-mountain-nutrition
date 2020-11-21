@@ -499,6 +499,8 @@
 			// background-color: $tomato;
 			width: 50%;
 			padding: 10px;
+
+
 			.input__wrapper {
 				background-color: $bleach;
 				margin: 15px;
@@ -510,12 +512,15 @@
 				font-style: normal;
 				font-size: 23px;
 				border-bottom: solid 4px rgba($brown, .5);
+				border-right: solid 4px rgba($brown, .5);
+
+				transition: border-color .3s ease-in;
 				input {
 					position: relative;
 					z-index: 100;
 					font-size: 18px;
 					background-color: transparent;
-					color: $tomato;
+					color: $brown;
 					width: 100%;
 					height: 100%;
 					border: none;
@@ -543,6 +548,12 @@
 					transition: all .23s ease-out;
 					pointer-events: none;
 				}
+			}
+			.invalid {
+				border-color: crimson;
+			}
+			.valid {
+				border-color: rgb(47, 194, 28);
 			}
 		}
 	}
