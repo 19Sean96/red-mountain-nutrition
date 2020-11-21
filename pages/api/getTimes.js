@@ -14,8 +14,9 @@ export default async (req, res) => {
 		})
 		.toArray();
 	// console.log(currentSchedule);
-
-	const orderedByMonth = groupBy(currentSchedule, "month");
+	const filteredSchedule = currentSchedule.filter(time => !time.scheduled)
+	console.log(filteredSchedule);
+	const orderedByMonth = groupBy(filteredSchedule, "month");
 
 	let i = 0;
 

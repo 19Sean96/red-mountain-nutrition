@@ -1,11 +1,12 @@
 @import './variables';
 @import './mixins';
+
 @import './header';
 @import './landing';
 @import './packages';
 @import './schedule';
 @import './admin';
-
+@import './success';
 * {
   margin: 0;
   padding: 0;

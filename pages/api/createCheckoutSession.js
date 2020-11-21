@@ -4,8 +4,8 @@ const stripe = require('stripe')('sk_test_51Hm93zGsw55hWpg0gKzN0LcpuZPovCBS0sq4a
 
 const capitalize = str => str.charAt(0).toUpperCase() + str.slice(1)
 export default async (req,res) => {
-    const { activePackage, activeFocus, customer} = req.body
-    console.log("CREATE CHECKOUT SESSION: ", customer);
+    const { activePackage, activeFocus, customer, activeTime} = req.body
+    console.log("ACTIVE TIME: ", activeTime);
     let desc = ''
 
     for (const focus in activeFocus) {
@@ -20,6 +20,9 @@ export default async (req,res) => {
 
     const session = await stripe.checkout.sessions.create({
         customer: customer.id,
+        metadata: {
+            date: activeTime.value
+        },
         payment_method_types: ['card'],
         line_items: [
             {
@@ -48,6 +51,7 @@ export default async (req,res) => {
         success_url: 'http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID}',
         cancel_url: 'http://localhost:3000/cancel'
     });
+    console.log(session);
     res.statusCode = 200;
     res.json({ id: session.id })
 }

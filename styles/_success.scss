@@ -1,0 +1,20 @@
+.success {
+    background-color: $grass;
+    height: 100vh;
+    text-align: center;
+    color: $bleach;
+    &--headline {
+        padding-top: 75px;
+        padding-bottom: 50px;
+        font-size: 48px;
+        font-weight: 300;
+    }
+
+    p {
+        font-size: 22px;
+        opacity: .8;
+        line-height: 1.8;
+    }
+    
+    a { color: inherit;}
+}

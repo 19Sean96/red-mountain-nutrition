@@ -49,11 +49,12 @@ export default function Provider ({ children }) {
 		return customer
 	}
 
-	const createCheckoutSession = async customer => {
+	const createCheckoutSession = async (customer) => {
 		const body = {
             activeFocus,
 			activePackage,
-			customer
+			customer,
+			activeTime
         }
         const response = await fetch("/api/createCheckoutSession", {
             method: "POST",
@@ -65,12 +66,12 @@ export default function Provider ({ children }) {
 		return session
 	}
 
-    const handleCheckoutEnter = async (event, customer) => {
+    const handleCheckoutEnter = async (event, customer, time) => {
 		console.log(customer);
         const stripe = await stripePromise;
 	
 		const customerID = await getCustomerID(customer)
-		const session = await createCheckoutSession(customerID)
+		const session = await createCheckoutSession(customerID, time)
 
         const result = await stripe.redirectToCheckout({
             sessionId: session.id,
