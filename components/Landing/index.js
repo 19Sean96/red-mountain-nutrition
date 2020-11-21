@@ -1,4 +1,4 @@
-import LandingForm from './LandingForm'
+import LandingForm from './form'
 
 const Landing = () => {
 	return (

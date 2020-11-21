@@ -1,12 +1,6 @@
 import { useState, useRef, useEffect, useContext } from "react";
-import styled from 'styled-components';
 import Link from 'next/link'
-import { CartContext } from "./context";
-
-const StyledBtn = styled.button`
-    box-shadow: inset 0 -4px 12px rgba(black, .21);
-
-`
+import { CartContext } from "../context";
 
 const LandingForm = (props) => {
     const { activeFocus, setActiveFocus } = useContext(CartContext);

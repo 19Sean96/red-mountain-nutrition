@@ -1,23 +1,14 @@
-import { useContext, useEffect, useState } from "react";
-import Head from "next/head";
-
+import { useEffect, useState } from "react";
+import { useRouter } from 'next/router'
 export default function Schedule() {
+	const router = useRouter()
 
-	const [step, setStep] = useState(1)
+	useEffect(() => {
+		router.push({
+			pathname: '/schedule/1'
+		}, "/schedule/1")
+	})
 
-	return (
-		<>
-			<Head>
-				<title>Red Mountain Nutrition</title>
-				<link
-					rel="stylesheet"
-					href="https://use.typekit.net/vyg3jkt.css"
-				/>
-				<link rel="icon" href="/logo.ico" />
-			</Head>
-
-
-		</>
-	);
+	return <></>
 }
 

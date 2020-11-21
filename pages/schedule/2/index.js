@@ -6,7 +6,8 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 
 import Interface from "../../../components/Interface";
-import ScheduleModal from "../../../components/ScheduleModal";
+import ScheduleModal from "../../../components/Schedule/Modal";
+import ScheduleInterface from "../../../components/Schedule/Interface";
 
 export default function Schedule() {
 	const router = useRouter();
@@ -114,10 +115,10 @@ export default function Schedule() {
 					<h1 className="schedule--title">
 						let's get you scheduled.
 					</h1>
-					<div className="schedule--content">
+					<ScheduleInterface>
 						<div className="schedule--calendar">
 							<h2 className="schedule--calendar--title">
-								Pick a date for your initial appointment:
+								Pick a date/time for your initial appointment:
 							</h2>
 						</div>
 						<div className="schedule--calendar--content">
@@ -127,22 +128,16 @@ export default function Schedule() {
 									value={date.value}
 								/>
 							</div>
+              <ScheduleModal
+									date={date}
+									times={times}
+									activeTime={activeTime}
+									setActiveTime={setActiveTime}
+									type="open"
+								/>
 						</div>
 
-						<a
-							className="schedule--content__confirm"
-							onClick={handleCheckoutEnter}
-						>
-							confirm & make payment
-						</a>
-					</div>
-					<ScheduleModal
-						date={date}
-						times={times}
-						activeTime={activeTime}
-						setActiveTime={setActiveTime}
-						type="open"
-					/>
+					</ScheduleInterface>
 				</section>
 			</Interface>
 		</>

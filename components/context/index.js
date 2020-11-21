@@ -38,16 +38,23 @@ export default function Provider ({ children }) {
 
 	}, [router ])
 
+	const getCustomerID = async data => {
+		console.log(data);
+		const response = await fetch('/api/createCustomer', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json'},
+			body: JSON.stringify(data)
+		})
+		const customer = await response.json()
+		return customer
+	}
 
-    const handleCheckoutEnter = async (event) => {
-
-        const body = {
+	const createCheckoutSession = async customer => {
+		const body = {
             activeFocus,
-            activePackage
+			activePackage,
+			customer
         }
-        console.log(event);
-        const stripe = await stripePromise;
-    
         const response = await fetch("/api/createCheckoutSession", {
             method: "POST",
             headers: { 'Content-Type': 'application/json'},
@@ -55,6 +62,16 @@ export default function Provider ({ children }) {
         });
     
         const session = await response.json();
+		return session
+	}
+
+    const handleCheckoutEnter = async (event, customer) => {
+		console.log(customer);
+        const stripe = await stripePromise;
+	
+		const customerID = await getCustomerID(customer)
+		const session = await createCheckoutSession(customerID)
+
         const result = await stripe.redirectToCheckout({
             sessionId: session.id,
         });

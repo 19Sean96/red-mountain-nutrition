@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Interface from '../components/Interface'
-import Landing from '../components/Landing'
+import Landing from '../components/Landing/index'
 import LifestylePackages from '../components/LifestylePackages' 
 
 import { connectToDatabase } from '../util/mongodb'

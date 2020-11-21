@@ -1,16 +1,29 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import Head from "next/head";
 import { CartContext } from "../../../components/context";
-
+import { useForm, Controller, ErrorMessage } from "react-hook-form";
 
 import Interface from "../../../components/Interface";
+import ScheduleInterface from "../../../components/Schedule/Interface";
+import NumberFormat from "react-number-format";
 
+const emailIsValid = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+const phoneIsValid = (phone) => /^\(\d{3}\)\s\d{3}-\d{4}/.test(phone);
 
 export default function Schedule() {
-	const { handleCheckoutEnter } = useContext(CartContext)
+	const { register, watch, control } = useForm();
+	const watchInputs = watch();
 
-	console.log(handleCheckoutEnter);
-	const [step, setStep] = useState(1)
+	const [emailValid, validateEmail] = useState(false);
+	const [phoneValid, validatePhone] = useState(false);
+	const [fullyValidated, fullyValidate] = useState(false);
+
+	useEffect(() => {
+		console.log(watchInputs);
+		validateEmail(emailIsValid(watchInputs.custEmail));
+		validatePhone(phoneIsValid(watchInputs.custPhone));
+		fullyValidate(emailValid && phoneValid);
+	}, [watchInputs]);
 
 	return (
 		<>
@@ -28,11 +41,70 @@ export default function Schedule() {
 					<h1 className="schedule--title">
 						let's get you scheduled.
 					</h1>
+					<ScheduleInterface
+						watchCustInputs={watchInputs}
+						validated={fullyValidated}
+					>
+						<div className="schedule--customer">
+							<h2 className="schedule--customer--title">
+								Enter Your Contact Info.
+							</h2>
+							<form className="schedule--customer--form">
+								<div className="schedule--customer__name input__wrapper">
+									<input
+										type="text"
+										name="custName"
+										id="custName"
+										ref={register}
+										placeholder="Your Name"
+									/>
+									<label htmlFor="custName">Name:</label>
+								</div>
+								<div className="schedule--customer__email input__wrapper">
+									<input
+										type="email"
+										name="custEmail"
+										id="custEmail"
+										ref={register}
+										placeholder="example@email.com"
+									/>
+									<label htmlFor="custEmail">Email:</label>
+								</div>
 
-					<button role="link" onClick={handleCheckoutEnter}>Checkout</button>
+								<div className="schedule--customer__phone input__wrapper">
+									<Controller
+										control={control}
+										name="custPhone"
+										defaultValue=""
+										id="custPhone"
+										ref={register}
+										render={({
+											onChange,
+											onBlur,
+											value,
+											name,
+											id,
+											className,
+										}) => (
+											<NumberFormat
+												onChange={onChange}
+												onBlur={onBlur}
+												value={value}
+												format="(###) ###-####"
+												placeholder="(123) 456-7890"
+												mask="_"
+												name={name}
+												id={id}
+											/>
+										)}
+									/>
+									<label htmlFor="custPhone">Phone:</label>
+								</div>
+							</form>
+						</div>
+					</ScheduleInterface>
 				</section>
 			</Interface>
 		</>
 	);
 }
-
