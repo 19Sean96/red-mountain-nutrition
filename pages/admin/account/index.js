@@ -4,7 +4,7 @@ import Interface from "../../../components/Interface";
 import { connectToDatabase } from "../../../util/mongodb";
 import { useState, useEffect, useContext } from "react";
 import { CartContext } from "../../../components/context";
-import DateTimePicker from "react-datetime-picker";
+import DateTimePicker from "react-datetime-picker/dist/entry.nostyle";
 import "react-calendar/dist/Calendar.css";
 import "react-clock/dist/Clock.css";
 import "react-datetime-picker/dist/DateTimePicker.css";
@@ -13,6 +13,7 @@ export default function Admin({ isConnected }) {
 	const { user } = useContext(CartContext);
 	const [value, onChange] = useState(new Date());
 	const [activeLogInType, setActiveLogInType] = useState("logIn");
+	const [schedule, setSchedule] = useState()
 	console.log(router);
 
 	const handleSubmit = async event => {
@@ -42,18 +43,21 @@ export default function Admin({ isConnected }) {
 	}
 
 	const getCurrentSchedule = async () => {
+		const body = { isOpen: false }
 		const res = await fetch('/api/getTimes', {
-			method: 'GET',
+			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
+			body: JSON.stringify(body)
 		})
 
 		const response = await res.json()
 		console.log(response);
+		return response
 	}
 
-	useEffect(() => {
+	useEffect(async() => {
 		!user &&
 			router.push(
 				{
@@ -62,7 +66,8 @@ export default function Admin({ isConnected }) {
 				"/admin"
 			);
 
-		getCurrentSchedule()
+		const response = await getCurrentSchedule()
+		setSchedule(response)
 	}, []);
 	return (
 		<>

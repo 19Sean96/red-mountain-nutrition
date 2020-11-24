@@ -43,10 +43,19 @@ export default function Success(props) {
 
 	useEffect(async () => {
 		if (customer && session) {
+			const { metadata } = session
+			const { id, email, name, phone } = customer
+			const body = {
+				id,
+				email,
+				name,
+				phone,
+				...metadata
+			}
 			const res = await fetch('/api/scheduleTime', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify(session.metadata)
+				body: JSON.stringify(body)
 			})
 			const response = await res.json()
 			console.log(response);

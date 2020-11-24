@@ -35,11 +35,15 @@ export default function Schedule() {
 	const [schedule, setSchedule] = useState();
 
 	useEffect(async () => {
+		const body = {
+			isOpen: true
+		}
 		const res = await fetch("/api/getTimes", {
-			method: "GET",
+			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 			},
+			body: JSON.stringify(body)
 		});
 
 		const response = await res.json();

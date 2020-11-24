@@ -4,11 +4,17 @@ export default async (req, res) => {
     const { db } = await connectToDatabase();
     console.log("REQ.BODY RIGHT HERE BOIIIII", req.body.date);
     let valid;
-
+    const {	id, email, name, phone } = req.body
     const time = await db.collection('schedule_open').find({
         value: req.body.date
     }).toArray()
     time[0].scheduled = true
+    time[0].customer = {
+        id,
+        email,
+        name,
+        phone
+    }
     console.log("THIS IS THE TIME", time);
     // console.log("EXISTING TIMES", existingTimesForDay);
     const updated = await db.collection('schedule_open').update({
