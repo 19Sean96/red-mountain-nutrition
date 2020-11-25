@@ -9,6 +9,23 @@ import Interface from "../../../components/Interface";
 import ScheduleModal from "../../../components/Schedule/Modal";
 import ScheduleInterface from "../../../components/Schedule/Interface";
 
+const getTimeSuffix = (time) => {
+	if (!time.suffix) {
+		if (time.hour >= 12) {
+			time.suffix = "PM";
+			if (time.hour !== 12) {
+				time.hour -= 12;
+			}
+		} else {
+			time.suffix = "AM";
+			if (time.hour === 0) {
+				time.hour = 12;
+			}
+		}
+	}
+	return time;
+};
+
 export default function Schedule() {
 	const router = useRouter();
 	const [buttonRefs, setButtonRefs] = useState([]);
@@ -36,17 +53,18 @@ export default function Schedule() {
 
 	useEffect(async () => {
 		const body = {
-			isOpen: true
-		}
+			isOpen: true,
+		};
 		const res = await fetch("/api/getTimes", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify(body)
+			body: JSON.stringify(body),
 		});
 
 		const response = await res.json();
+		console.log("RESPONSE FROM DB", response);
 		setSchedule(response);
 	}, []);
 
@@ -66,16 +84,8 @@ export default function Schedule() {
 					availableTimes.map((time) => {
 						time.active = false;
 
-						if (!time.suffix) {
-							if (time.hour >= 12) {
-								time.suffix = "PM";
-								if (time.hour !== 12) {
-									time.hour -= 12;
-								}
-							} else {
-								time.suffix = "AM";
-							}
-						}
+						time = getTimeSuffix(time);
+
 						arr.push(time);
 					});
 				console.log("EDITED SCHEDULE FOR THE DAY: ", arr);
@@ -132,15 +142,14 @@ export default function Schedule() {
 									value={date.value}
 								/>
 							</div>
-              <ScheduleModal
-									date={date}
-									times={times}
-									activeTime={activeTime}
-									setActiveTime={setActiveTime}
-									type="open"
-								/>
+							<ScheduleModal
+								date={date}
+								times={times}
+								activeTime={activeTime}
+								setActiveTime={setActiveTime}
+								type="open"
+							/>
 						</div>
-
 					</ScheduleInterface>
 				</section>
 			</Interface>

@@ -25,17 +25,19 @@ export default function ScheduleModal(props) {
 			</h3>
 			<ul className="schedule--modal--list">
 				<Scrollbars
-                    universal
-                    style={{height: 300}}
+					universal
+					style={{ height: 300 }}
 					// autoHeight
 					// autoHeightMin={100}
 					// autoHeightMax={200}
 				>
 					{times.length > 0 ? (
 						times.map((time, i) => {
+							console.log(times);
 							if (time.minute === 0) {
 								time.minute = "00";
 							}
+
 							if (time.hour === 0 && time.suffix === "AM") {
 								time.hour = 12;
 							}
@@ -57,7 +59,13 @@ export default function ScheduleModal(props) {
 											setActiveTime(time);
 										}}
 									>
-										{time.hour}:{time.minute} {time.suffix}
+										{time.hour}:
+										{time.minute >= 0 &&
+										time.minute <= 9 &&
+										time.minute !== "00"
+											? "0" + time.minute
+											: time.minute}{" "}
+										{time.suffix}
 									</button>
 								</li>
 							);
