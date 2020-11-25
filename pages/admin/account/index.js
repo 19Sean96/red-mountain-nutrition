@@ -49,16 +49,14 @@ export default function Admin({ isConnected }) {
 	const [activeLogInType, setActiveLogInType] = useState("logIn");
 	const [schedule, setSchedule] = useState();
 	const [openTimes, setOpenTimes] = useState();
-	const [history, addHistory] = useState();
+	const [recentlyAdded, updateRecentlyAdded] = useState([]);
 	const [activeScheduleView, setActiveScheduleView] = useState({
 		scheduled: true,
 		open: false,
 	});
-	console.log(router);
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
-		console.log(value.getMonth());
 		const body = {
 			value: value,
 			month: value.getMonth(),
@@ -77,8 +75,10 @@ export default function Admin({ isConnected }) {
 			},
 			body: JSON.stringify(body),
 		});
+		let response = await res.json();
+		response.code = res.status;
+		updateRecentlyAdded([response, ...recentlyAdded]);
 
-		const response = await res.json();
 		console.log(response);
 	};
 
@@ -93,7 +93,6 @@ export default function Admin({ isConnected }) {
 		});
 
 		const response = await res.json();
-		console.log(response);
 		return response;
 	};
 
@@ -108,10 +107,16 @@ export default function Admin({ isConnected }) {
 
 		const scheduledTimes = await getSchedule(false);
 		const openTimes = await getSchedule(true);
-
+		console.log("SCHEDULED TIMES", scheduledTimes);
+		console.log("OPEN TIMES", openTimes);
 		setSchedule(scheduledTimes);
 		setOpenTimes(openTimes);
 	}, []);
+	useEffect(async () => {
+		const openTimes = await getSchedule(true);
+
+		setOpenTimes(openTimes);
+	}, [recentlyAdded]);
 	return (
 		<>
 			<Head>
@@ -134,7 +139,7 @@ export default function Admin({ isConnected }) {
 										? "Active Schedule"
 										: "Available Times"}
 								</h2>
-								{(schedule || openTimes) && (
+								{schedule && openTimes && (
 									<div className="admin--schedule--list">
 										<div className="admin--schedule--toggle__wrapper">
 											<button
@@ -177,21 +182,29 @@ export default function Admin({ isConnected }) {
 													activeScheduleView.scheduled
 														? schedule
 														: openTimes
-												).map((month) => (
-													<MonthCard
-														schedule={
-															activeScheduleView.scheduled
-																? schedule
-																: openTimes
-														}
-														month={month}
-														type={
-															activeScheduleView.scheduled
-																? "scheduled"
-																: "open"
-														}
-													/>
-												))}
+												).map((year) => {
+													console.log(year);
+													console.log(
+														activeScheduleView.scheduled
+															? schedule
+															: openTimes
+													);
+													return (
+														<YearCard
+															schedule={
+																activeScheduleView.scheduled
+																	? schedule
+																	: openTimes
+															}
+															year={year}
+															type={
+																activeScheduleView.scheduled
+																	? "scheduled"
+																	: "open"
+															}
+														/>
+													);
+												})}
 											</Scrollbars>
 										</ul>
 									</div>
@@ -213,7 +226,73 @@ export default function Admin({ isConnected }) {
 									</button>
 								</div>
 								<div className="admin--add-time__recent">
-									{history && <></>}
+									{recentlyAdded.length ? (
+										<div className="recent">
+											<Scrollbars
+												universal
+												style={{ height: "45vh" }}
+											>
+												{recentlyAdded.map(
+													({ time, code }) => {
+														const valid =
+															code === 200;
+														time = getTimeSuffix(
+															time
+														);
+
+														console.log(
+															"WE ARE ADDING A NEW TIME"
+														);
+														return (
+															<div
+																className={`recent--card recent--card__${
+																	valid
+																		? "valid"
+																		: "invalid "
+																}`}
+															>
+																<p className="recent--card--description">
+																	<span>
+																		Time for{" "}
+																	</span>{" "}
+																	<TimeCard
+																		time={
+																			time
+																		}
+																		type="open"
+																	/>
+																	<span>
+																		{" "}on{" "}
+																		{time.month +
+																			1}
+																		/
+																		{
+																			time.date
+																		}
+																		/
+																		{
+																			time.year
+																		}{" "}
+																	</span>
+																	{
+																		valid ? (
+																			<span> has been submitted.</span>
+																		) : (
+																			<span> cannot be added as it is invalid.</span>
+																		)
+																	}
+																</p>
+															</div>
+														);
+													}
+												)}
+											</Scrollbars>
+										</div>
+									) : (
+										<p className="admin--add-time__recent__empty">
+											Enter a Time Above
+										</p>
+									)}
 								</div>
 							</div>
 						</section>
@@ -221,6 +300,22 @@ export default function Admin({ isConnected }) {
 				)}
 			</Interface>
 		</>
+	);
+}
+function YearCard({ schedule, year, type }) {
+	return (
+		<li className="list--year">
+			<h3 className="list--year__name">{year}</h3>
+			<div className="list--year__months">
+				{Object.keys(schedule[year]).map((month) => (
+					<MonthCard
+						schedule={schedule[year]}
+						month={month}
+						type={type}
+					/>
+				))}
+			</div>
+		</li>
 	);
 }
 
@@ -251,7 +346,6 @@ function DateCard({ months, month, day, schedule, type }) {
 			<div className="list--day__times">
 				{schedule[month][day].map((time) => {
 					time = getTimeSuffix(time);
-					console.log(time);
 					return <TimeCard time={time} type={type} />;
 				})}
 			</div>
@@ -274,7 +368,7 @@ function TimeCard({ time, type }) {
 					<span className="suffix">{time.suffix}</span>
 				</p>
 			</div>
-			{type === "scheduled" && (
+			{type === "scheduled" && time.customer && (
 				<>
 					<hr />
 					<div className="list--time--customer invisible">

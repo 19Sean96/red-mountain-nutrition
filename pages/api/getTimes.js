@@ -17,21 +17,20 @@ export default async (req, res) => {
   const filteredSchedule = currentSchedule.filter((time) =>
     isOpen ? !time.scheduled : time.scheduled
   );
-  console.log(filteredSchedule);
-  const orderedByMonth = groupBy(filteredSchedule, "month");
+  const orderedByYear = groupBy(filteredSchedule, 'year')
 
-  let i = 0;
 
-  for (const monthArr in orderedByMonth) {
-    orderedByMonth[monthArr] = groupBy(orderedByMonth[monthArr], "date");
+  for (const yearArr in orderedByYear) {
+    orderedByYear[yearArr] = groupBy(orderedByYear[yearArr], "month")
 
-    i++;
+    for (const monthArr in orderedByYear[yearArr]) {
+      orderedByYear[yearArr][monthArr] = groupBy(orderedByYear[yearArr][monthArr], 'date')
+    }
+
   }
 
-  console.log(i);
-
   res.statusCode = 200;
-  res.json(orderedByMonth);
+  res.json(orderedByYear);
 };
 
 function groupBy(arr, prop) {

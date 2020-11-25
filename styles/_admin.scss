@@ -22,7 +22,7 @@
 		margin: 40px auto;
 		display: flex;
 		justify-content: space-around;
-	}
+    }
 
 	&--schedule {
         width: 40%;
@@ -54,6 +54,7 @@
                 .active {
                     background-color: rgba($tomato, .4);
                     box-shadow: none;
+                    // border-top: 3px solid $bleach;
                     color: $bleach;
                 }
             }
@@ -64,9 +65,23 @@
 			background-color: $tomato;
 			border-radius: 12px;
             width: 100%;
-            padding: 5px 10px 25px;
+            padding: 5px 5px 25px;
+            box-shadow: 0 -2px 16px rgba($tomato, .38);
             .list {
                 max-height:50vh;
+                &--year {
+                    list-style: none;
+                    position: relative;
+                    &__name {
+                        font-size: 74px;
+                        color: rgba($bleach, .7);
+                        font-family: ambroise-firmin-std, serif;
+                        font-weight: 400;
+                        font-style: normal;
+                        margin-bottom: -10px;
+                        text-align: center;
+                    }
+                }
                 &--month {
                     list-style: none;
                     padding: 10px;
@@ -126,8 +141,58 @@
     
     &--add-time {
         width: 40%;
+        max-height: 70vh;
+
         h2 {
 			margin-bottom: 15px;
+        }
+
+        &__recent {
+            max-height: 100%;
+			min-height: 50px;
+			background-color: $bleach;
+			border-radius: 12px;
+            width: 80%;
+            padding: 25px 30px 25px;
+            margin-top: 25px;
+            box-shadow: 0 -2px 16px rgba($brown, .38);
+
+            &__empty {
+                color: rgba($bleach, .7);
+                font-weight: 700;
+                text-align: center;
+                font-size: 22px;
+                padding: 15px;
+            }
+
+            .recent {
+
+                &--card {
+                    margin: 15px 0;
+                    padding: 20px 45px;
+                    border-radius: 4px;
+                    font-family: futura-pt, sans-serif;
+                    font-weight: 600;
+                    font-style: normal;        
+                    font-size: 16px;   
+                    text-align: center;
+                    &__invalid {
+                        background-color: $danger;
+                    }
+                    &__valid {
+                        background-color: $success;
+                    }
+                    .list--time {
+                        background: transparent;
+                        border: none;
+                        outline: none;
+                        font-family: futura-pt, sans-serif;
+                        font-weight: 600;
+                        font-style: normal;        
+                        font-size: 16px;  
+                    }
+                }
+            }
         }
 
         &__input {
