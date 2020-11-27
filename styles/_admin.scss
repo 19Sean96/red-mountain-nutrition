@@ -111,7 +111,7 @@
                 }
 
                 &--time {
-                    padding: 10px 17.5px;
+                    padding: 20px 17.5px;
                     margin: 5px;
                     width: 185px;
                     font-family: futura-pt, sans-serif;
@@ -123,8 +123,28 @@
                         margin-top: 10px;
                     }
                     &--data {
+                        position: relative;
+
                         p {
                             font-size: 18px;
+                            margin-left: -32px;
+                        }
+
+                        button {
+                            position: absolute;
+                            right: 0;
+                            top: 50%;
+                            transform: translate(0,-50%);
+                            width: 32px;
+                            height: 32px;
+                            border-radius: 50%;
+                            border: none;
+                            background: rgba($tomato, .55);
+                            box-shadow: 0 -1px 11px rgba($tomato, .6);
+                            cursor: pointer;
+                            svg {
+                                color: $tomato;
+                            }
                         }
                     }
                     &--customer {
@@ -136,7 +156,11 @@
                     }
                 }
             }
-		}
+        }
+        
+        @media screen and (max-width: 1300px) {
+            width: 60%;
+        }
     }
     
     &--add-time {
@@ -149,14 +173,13 @@
 
         &__recent {
             max-height: 100%;
-			min-height: 50px;
+			min-height: 350px;
 			background-color: $bleach;
 			border-radius: 12px;
             width: 80%;
             padding: 25px 30px 25px;
             margin-top: 25px;
             box-shadow: 0 -2px 16px rgba($brown, .38);
-
             &__empty {
                 color: rgba($bleach, .7);
                 font-weight: 700;
@@ -168,7 +191,7 @@
             .recent {
 
                 &--card {
-                    margin: 15px 0;
+                    margin: 15px 20px;
                     padding: 20px 45px;
                     border-radius: 4px;
                     font-family: futura-pt, sans-serif;
@@ -176,11 +199,54 @@
                     font-style: normal;        
                     font-size: 16px;   
                     text-align: center;
+                    position: relative;
+                    animation: fadeIn .25s ease-in-out;
+
+                    @keyframes fadeIn {
+                        from {
+                            opacity: 0;
+                            
+                        }
+
+                        to {
+                            opacity: 1;
+                        }
+                    }
+
+                    .close-card {
+                        position: absolute;
+                        right: 10px;
+                        top: 10px;
+                        // transform: translate(0,-50%);
+                        width: 32px;
+                        height: 32px;
+                        border-radius: 50%;
+                        border: none;
+                        background: rgba($bleach, .55);
+                        box-shadow: 0 -1px 11px rgba($brown, .4);
+                        cursor: pointer;
+                    }
+
                     &__invalid {
                         background-color: $danger;
+                        box-shadow: 0 -3px 12px rgba($danger, .5);
+                        .close-card {
+    
+                            svg {
+                                color: $tomato;
+                            }
+                        }
                     }
                     &__valid {
                         background-color: $success;
+                        box-shadow: 0 -3px 12px rgba($success, .5);
+
+                        .close-card {
+    
+                            svg {
+                                color: $grass;
+                            }
+                        }
                     }
                     .list--time {
                         background: transparent;
@@ -191,13 +257,16 @@
                         font-style: normal;        
                         font-size: 16px;  
                     }
+
                 }
             }
+
         }
 
         &__input {
             display: flex;
             align-items: center;
+            flex-wrap: wrap;
             button[type="submit"] {
                 height: 60px;
                 margin-left: 25px;
@@ -205,19 +274,49 @@
                 font-family: futura-pt, sans-serif;
                 font-weight: 600;
                 font-style: normal;        
-                font-size: 18px;    
+                font-size: 16px;   
+                border: none;
+                border-radius: 6px;
+                box-shadow: 0 -2px 6px rgba($brown, .23); 
+                background-color: rgba($brown, .23);
+                color: $brown;
+            }
+
+
+        }
+
+        @media screen and (max-width: 1300px) {
+            width: 35%;
+
+            &__recent {
+                width: 100%;
+            }
+
+            &__input {
+
+                button[type="submit"] {
+                    width: 260px;
+                    margin-left: 0;
+                    margin-top: 12.5px;
+                }
             }
         }
 
         .react-datetime-picker {
             height: 60px;
-
+            border-radius: 6px;
+            box-shadow: 0 -2px 6px rgba($brown, .23); 
+            background-color: rgba($brown, .13);
+            color: $brown;
+            width: 310px;
+            max-width: 100%;
             &__wrapper {
                 padding: 5px 15px;
                 font-family: futura-pt, sans-serif;
                 font-weight: 400;
                 font-style: normal;        
-                font-size: 18px; 
+                font-size: 16px; 
+                border: none;
             }
 
         }
