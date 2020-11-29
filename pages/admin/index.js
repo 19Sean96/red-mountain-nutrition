@@ -58,52 +58,39 @@ export default function Admin({ isConnected }) {
 				<link rel="icon" href="/logo.ico" />
 			</Head>
 
-			<Interface>
-				<h1 className="admin--title">
-					{activeLogInType === "logIn"
-						? "Log In With Your Credentials"
-						: "Sign Up To Receive Credentials"}
-				</h1>
-				<form className="admin--form" onSubmit={handleSubmit(onSubmit)}>
-					<div>
-						<input
-							type="radio"
-							name="authType"
-							id="logIn"
-							value="logIn"
-							onChange={(e) => setActiveLogInType(e.target.id)}
-							checked={activeLogInType === "logIn"}
-						/>
-						<label htmlFor="logIn">Log In</label>
-					</div>
-					<div>
-						<input
-							type="radio"
-							name="authType"
-							id="signUp"
-							value="signUp"
-							onChange={(e) => setActiveLogInType(e.target.id)}
-							checked={activeLogInType === "signUp"}
-						/>
-						<label htmlFor="signUp">Sign Up</label>
-					</div>
+			<h1 className="admin--title">
+				{activeLogInType === "logIn"
+					? "Log In With Your Credentials"
+					: "Sign Up To Receive Credentials"}
+			</h1>
+			<form className="admin--form" onSubmit={handleSubmit(onSubmit)}>
+				<div>
 					<input
-						type="text"
-						name="username"
-						id="username"
-						ref={register}
-						placeholder="Enter Name"
+						type="radio"
+						name="authType"
+						id="logIn"
+						value="logIn"
+						onChange={(e) => setActiveLogInType(e.target.id)}
+						checked={activeLogInType === "logIn"}
 					/>
-					<input
-						type="password"
-						name="password"
-						id="password"
-						ref={register}
-						placeholder="Enter Password"
-					/>
-					<input type="submit" />
-				</form>
-			</Interface>
+					<label htmlFor="logIn">Log In</label>
+				</div>
+				<input
+					type="text"
+					name="username"
+					id="username"
+					ref={register}
+					placeholder="Enter Name"
+				/>
+				<input
+					type="password"
+					name="password"
+					id="password"
+					ref={register}
+					placeholder="Enter Password"
+				/>
+				<input type="submit" />
+			</form>
 		</>
 	);
 }

@@ -44,7 +44,6 @@ const getTimeSuffix = (time) => {
 };
 
 export default function Admin({ isConnected }) {
-	console.log(window);
 	const router = useRouter();
 	const { user } = useContext(CartContext);
 	const [value, onChange] = useState(new Date());
