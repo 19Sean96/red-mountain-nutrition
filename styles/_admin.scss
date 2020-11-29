@@ -18,10 +18,39 @@
 	}
 
 	&--body {
+        position: relative;
 		width: 91.7%;
 		margin: 40px auto;
 		display: flex;
 		justify-content: space-around;
+    }
+
+    &--switch {
+        margin: 0 auto;
+        width: 90%;
+        display: flex;
+        align-items: 0;
+        justify-content: center;
+        padding: 12px;
+
+        &__schedule,
+        &__add-time {
+            padding: 14px 28px;
+            margin: 0 10px;
+            border-radius: 8px;
+            border: none;
+            background-color: $bleach;
+        }
+
+        .active {
+            box-shadow: 0 -3px 6px rgba($brown, .36);
+            border-bottom: $tomato solid 3px;
+
+        }
+
+        .inactive {
+            box-shadow: inset 0 -3px 6px rgba($brown, .36);
+        }
     }
 
 	&--schedule {
@@ -160,6 +189,51 @@
         
         @media screen and (max-width: 1300px) {
             width: 60%;
+        }
+
+        @media screen and (max-width: 1000px) {
+            width: 85%;
+        }
+
+        @media screen and (max-width: 760px) {
+            width: 90%;
+            &--toggle {
+                font-size: 17px;
+            }
+            &--list {
+
+                .list {
+
+                    &--year {
+                        &__name {
+                            font-size: 56px;
+                        }
+                    }
+
+                    &--month {
+                        &__name {
+                            margin-top: 12px;
+                            font-size: 32px;
+                        }
+                    }
+
+                    &--day {
+                        &__name {
+                            font-size: 22px;
+                        }
+                    }
+                    &--time {
+                        padding: 14px 11px;
+                        width: 160px;
+                        &--data {
+
+                            p {
+                                font-size: 16px;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
     
@@ -302,13 +376,56 @@
             }
         }
 
+        @media screen and (max-width: 1000px) {
+            width: 85%;
+
+            &__input {
+
+                button[type="submit"] {
+                    margin-left: 12.5px;
+                    margin-top: 0;
+                }
+            }
+        }
+
+        @media screen and (max-width: 760px) {
+
+            &__input {
+
+                button[type="submit"] {
+                    width: 80%;
+                    margin-left: 0;
+                    margin-top: 12.5px;
+                    min-width: 310px;
+                }
+            }
+
+            &__recent {
+                padding: 15px 17.5px 15px 0;
+
+            }
+        }
+
+        @media screen and (max-width: 450px) {
+            width: 100%;
+            
+            &__input {
+
+                button[type="submit"] {
+                    width: 100%;
+
+                    min-width: none;
+                }
+            }
+        }
+
         .react-datetime-picker {
             height: 60px;
             border-radius: 6px;
             box-shadow: 0 -2px 6px rgba($brown, .23); 
             background-color: rgba($brown, .13);
             color: $brown;
-            width: 310px;
+            min-width: 310px;
             max-width: 100%;
             &__wrapper {
                 padding: 5px 15px;
@@ -318,6 +435,22 @@
                 font-size: 16px; 
                 border: none;
             }
+            @media screen and (max-width: 760px) {
+                width: 80%;
+            }
+            @media screen and (max-width: 450px) {
+                width: 100%;
+            }
+
+        }
+    }
+
+    @media screen and (max-width: 450px) {
+
+        &--title {
+            font-size: 24px;
+            padding: 0;
+            margin: 10px;
 
         }
     }

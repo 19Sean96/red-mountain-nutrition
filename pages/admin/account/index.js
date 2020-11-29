@@ -44,7 +44,7 @@ const getTimeSuffix = (time) => {
 };
 
 export default function Admin({ isConnected }) {
-	console.log(window)
+	console.log(window);
 	const router = useRouter();
 	const { user } = useContext(CartContext);
 	const [value, onChange] = useState(new Date());
@@ -56,7 +56,11 @@ export default function Admin({ isConnected }) {
 		scheduled: true,
 		open: false,
 	});
-
+	const [activeMobileAdminView, setActiveMobileAdminView] = useState({
+		schedule: false,
+		addTime: true,
+	});
+	const [isMobile, setIsMobile] = useState();
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		const body = {
@@ -106,7 +110,6 @@ export default function Admin({ isConnected }) {
 			let arr = [...recentlyAdded];
 			arr.splice(index, 1);
 			console.log(arr);
-			// console.log(recentlyAdded.splice(index, 1));
 			updateRecentlyAdded(arr);
 		}
 	};
@@ -127,13 +130,19 @@ export default function Admin({ isConnected }) {
 
 	useEffect(() => {
 		function handleResize() {
-			console.log(window.innerWidth);
+			if (window.innerWidth < 1000) {
+				console.log(window.innerWidth);
+
+				!isMobile && setIsMobile(true);
+			} else {
+				isMobile && setIsMobile(false);
+			}
 		}
 
-		window.addEventListener('resize', handleResize)
+		window.addEventListener("resize", handleResize);
 
-		return _ => window.removeEventListener('resize', handleResize)
-	})
+		return (_) => window.removeEventListener("resize", handleResize);
+	});
 
 	useEffect(async () => {
 		!user &&
@@ -144,10 +153,10 @@ export default function Admin({ isConnected }) {
 				"/admin"
 			);
 
+		setIsMobile(window.innerWidth < 1000);
+
 		const scheduledTimes = await getSchedule(false);
 		const openTimes = await getSchedule(true);
-		console.log("SCHEDULED TIMES", scheduledTimes);
-		console.log("OPEN TIMES", openTimes);
 		setSchedule(scheduledTimes);
 		setOpenTimes(openTimes);
 	}, []);
@@ -170,177 +179,215 @@ export default function Admin({ isConnected }) {
 			{user && (
 				<>
 					<h1 className="admin--title">Welcome back, {user}.</h1>
+					{isMobile && (
+						<aside className="admin--switch">
+							<button className={`admin--switch__schedule ${activeMobileAdminView.schedule ? 'active' : 'inactive'}`} onClick={e => setActiveMobileAdminView({
+								schedule: true,
+								addTime: false
+							})}>
+								Schedule
+							</button>
+							<button className={`admin--switch__add-time ${activeMobileAdminView.addTime ? 'active' : 'inactive'}`} onClick={e => setActiveMobileAdminView({
+								schedule: false,
+								addTime: true
+							})}>
+								Add Time
+							</button>
+						</aside>
+					)}
 					<section className="admin--body">
-						<div className="admin--schedule">
-							<h2>
-								{activeScheduleView.scheduled
-									? "Active Schedule"
-									: "Available Times"}
-							</h2>
-							{schedule && openTimes && (
-								<div className="admin--schedule--list">
-									<div className="admin--schedule--toggle__wrapper">
-										<button
-											className={`admin--schedule--toggle ${
-												activeScheduleView.scheduled
-													? "active"
-													: ""
-											}`}
-											onClick={(e) =>
-												setActiveScheduleView({
-													scheduled: true,
-													open: false,
-												})
-											}
-										>
-											Scheduled Appointments
-										</button>
-										<button
-											className={`admin--schedule--toggle ${
-												activeScheduleView.open
-													? "active"
-													: ""
-											}`}
-											onClick={(e) =>
-												setActiveScheduleView({
-													scheduled: false,
-													open: true,
-												})
-											}
-										>
-											Open Appointments
-										</button>
-									</div>
-									<ul className="list">
-										<Scrollbars
-											universal
-											style={{ height: "50vh" }}
-										>
-											{Object.keys(
-												activeScheduleView.scheduled
-													? schedule
-													: openTimes
-											).map((year) => {
-												console.log(year);
-												console.log(
+						{((isMobile && activeMobileAdminView.schedule) ||
+							!isMobile) && (
+							<div className="admin--schedule">
+								<h2>
+									{activeScheduleView.scheduled
+										? "Active Schedule"
+										: "Available Times"}
+								</h2>
+								{schedule && openTimes && (
+									<div className="admin--schedule--list">
+										<div className="admin--schedule--toggle__wrapper">
+											<button
+												className={`admin--schedule--toggle ${
+													activeScheduleView.scheduled
+														? "active"
+														: ""
+												}`}
+												onClick={(e) =>
+													setActiveScheduleView({
+														scheduled: true,
+														open: false,
+													})
+												}
+											>
+												Scheduled Appointments
+											</button>
+											<button
+												className={`admin--schedule--toggle ${
+													activeScheduleView.open
+														? "active"
+														: ""
+												}`}
+												onClick={(e) =>
+													setActiveScheduleView({
+														scheduled: false,
+														open: true,
+													})
+												}
+											>
+												Open Appointments
+											</button>
+										</div>
+										<ul className="list">
+											<Scrollbars
+												universal
+												style={{ height: "50vh" }}
+											>
+												{Object.keys(
 													activeScheduleView.scheduled
 														? schedule
 														: openTimes
-												);
-												return (
-													<YearCard
-														schedule={
-															activeScheduleView.scheduled
-																? schedule
-																: openTimes
-														}
-														year={year}
-														type={
-															activeScheduleView.scheduled
-																? "scheduled"
-																: "open"
-														}
-														handleRemoveTime={
-															handleRemoveTime
-														}
-													/>
-												);
-											})}
-										</Scrollbars>
-									</ul>
-								</div>
-							)}
-						</div>
-						<div className="admin--add-time">
-							<h2>Add A New Time</h2>
-							<div className="admin--add-time__input">
-								<DateTimePicker
-									value={value}
-									onChange={onChange}
-								/>
-								<button
-									type="submit"
-									onSubmit={handleSubmit}
-									onClick={handleSubmit}
-								>
-									Enter Timeslot
-								</button>
-							</div>
-							<div className="admin--add-time__recent">
-								{recentlyAdded.length ? (
-									<div className="recent">
-										<Scrollbars
-											universal
-											style={{ height: "45vh" }}
-										>
-											{recentlyAdded.map(
-												({ time, code }, index) => {
-													const valid = code === 200;
-													time = getTimeSuffix(time);
-
+												).map((year) => {
+													console.log(year);
 													console.log(
-														"WE ARE ADDING A NEW TIME"
+														activeScheduleView.scheduled
+															? schedule
+															: openTimes
 													);
 													return (
-														<div
-															className={`recent--card recent--card__${
-																valid
-																	? "valid"
-																	: "invalid "
-															}`}
-															key={index}
-														>
-															<p className="recent--card--description">
-																<span>
-																	Time for{" "}
-																</span>{" "}
-																<TimeCard
-																	time={time}
-																	type="recentlyAdded"
-																	handleRemoveTime={
-																		handleRemoveTime
-																	}
-																	index={
-																		index
-																	}
-																/>
-																<span>
-																	{" "}
-																	on{" "}
-																	{time.month +
-																		1}
-																	/{time.date}
-																	/{time.year}{" "}
-																</span>
-																{valid ? (
-																	<span>
-																		{" "}
-																		has been
-																		submitted.
-																	</span>
-																) : (
-																	<span>
-																		{" "}
-																		cannot
-																		be added
-																		as it is
-																		invalid.
-																	</span>
-																)}
-															</p>
-														</div>
+														<YearCard
+															schedule={
+																activeScheduleView.scheduled
+																	? schedule
+																	: openTimes
+															}
+															year={year}
+															type={
+																activeScheduleView.scheduled
+																	? "scheduled"
+																	: "open"
+															}
+															handleRemoveTime={
+																handleRemoveTime
+															}
+														/>
 													);
-												}
-											)}
-										</Scrollbars>
+												})}
+											</Scrollbars>
+										</ul>
 									</div>
-								) : (
-									<p className="admin--add-time__recent__empty">
-										Enter a Time Above
-									</p>
 								)}
 							</div>
-						</div>
+						)}
+
+						{((isMobile && activeMobileAdminView.addTime) ||
+							!isMobile) && (
+							<div className="admin--add-time">
+								<h2>Add A New Time</h2>
+								<div className="admin--add-time__input">
+									<DateTimePicker
+										value={value}
+										onChange={onChange}
+									/>
+									<button
+										type="submit"
+										onSubmit={handleSubmit}
+										onClick={handleSubmit}
+									>
+										Enter Timeslot
+									</button>
+								</div>
+								<div className="admin--add-time__recent">
+									{recentlyAdded.length ? (
+										<div className="recent">
+											<Scrollbars
+												universal
+												style={{ height: "45vh" }}
+											>
+												{recentlyAdded.map(
+													({ time, code }, index) => {
+														const valid =
+															code === 200;
+														time = getTimeSuffix(
+															time
+														);
+
+														console.log(
+															"WE ARE ADDING A NEW TIME"
+														);
+														return (
+															<div
+																className={`recent--card recent--card__${
+																	valid
+																		? "valid"
+																		: "invalid "
+																}`}
+																key={index}
+															>
+																<p className="recent--card--description">
+																	<span>
+																		Time for{" "}
+																	</span>{" "}
+																	<TimeCard
+																		time={
+																			time
+																		}
+																		type="recentlyAdded"
+																		handleRemoveTime={
+																			handleRemoveTime
+																		}
+																		index={
+																			index
+																		}
+																	/>
+																	<span>
+																		{" "}
+																		on{" "}
+																		{time.month +
+																			1}
+																		/
+																		{
+																			time.date
+																		}
+																		/
+																		{
+																			time.year
+																		}{" "}
+																	</span>
+																	{valid ? (
+																		<span>
+																			{" "}
+																			has
+																			been
+																			submitted.
+																		</span>
+																	) : (
+																		<span>
+																			{" "}
+																			cannot
+																			be
+																			added
+																			as
+																			it
+																			is
+																			invalid.
+																		</span>
+																	)}
+																</p>
+															</div>
+														);
+													}
+												)}
+											</Scrollbars>
+										</div>
+									) : (
+										<p className="admin--add-time__recent__empty">
+											Enter a Time Above
+										</p>
+									)}
+								</div>
+							</div>
+						)}
 					</section>
 				</>
 			)}
