@@ -12,10 +12,21 @@
         justify-content: space-between;
         align-items: center;
     }
+
+    @media screen and (max-width: 750px) {
+        top: 20px;
+    }
+    @media screen and (max-width: 500px) {
+        &--inner {
+            flex-direction: column;
+            height: 20vh;
+        }
+    }
 }
 
 .logo {
     height: 72.5%;
+    max-height: 65px;
     &--wrapper {
         height: 100%;
         display: flex;
@@ -23,6 +34,7 @@
         align-items: center;
         cursor: pointer;
     }
+
 }
 
 .nav {
@@ -32,5 +44,15 @@
         margin: 0 36.5px;
         font-size: 23px;
         color: $grass;
+    }
+
+    @media screen and (max-width: 750px) {
+        a {
+            font-size: 21px;
+            margin: 0 24.25px;
+        }
+    }
+    @media screen and (max-width: 500px) {
+        margin-bottom: 15px;
     }
 }

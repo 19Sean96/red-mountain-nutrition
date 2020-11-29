@@ -1,5 +1,5 @@
 .landing {
-    height: 115vh;
+    min-height: 115vh;
     overflow-x: hidden;
 	background: linear-gradient(
 			to bottom,
@@ -11,6 +11,23 @@
 		),
         url(/perishables.jpg);
     background-size: cover;
+
+    @media screen and (max-width: 1350px) {
+        background: linear-gradient(
+			to bottom,
+			rgba($bleach, 1) 0%,
+			rgba($bleach, 0.75) 52.5%,
+			rgba($bleach, 0.68) 57.5%,
+			rgba($bleach, 0.71) 70%,
+			rgba($bleach, 1) 100%
+		),
+        url(/perishables.jpg);
+        background-size: cover;
+
+    }
+    @media screen and (max-width: 600px) {
+        min-height: 105vh;
+    }
         
     &--inner {
         display: grid;
@@ -19,6 +36,9 @@
         width: 83.33%;
         margin: auto;
         padding-top: 180px;
+        @media screen and (max-width: 500px) {
+            width: 100%;
+        }
     }
     &--title {
         font-family: ambroise-firmin-std, serif;
@@ -30,6 +50,30 @@
         color: $brown;
         grid-column: 1/9;
         grid-row: 1/2;
+
+        @media screen and (max-width: 1850px) {
+            font-size: 85.6px;
+        }
+        @media screen and (max-width: 1650px) {
+            font-size: 73px;
+        }
+        @media screen and (max-width: 1350px) {
+            font-size: 62px;
+            grid-column: 1/10;
+            text-align: right;
+        }
+        @media screen and (max-width: 1000px) {
+            font-size: 58px;
+            grid-column: 1/12;
+        }
+        @media screen and (max-width: 760px) {
+            grid-column: 1/13;
+            text-align: center;
+            font-size: 48px;
+        }
+        @media screen and (max-width: 575px) {
+            font-size: 36px;
+        }
 
     }
     &--subtitle {
@@ -43,6 +87,28 @@
         text-transform: capitalize;
         color: $tomato;
         text-align: right;
+
+        @media screen and (max-width: 1850px) {
+            font-size: 42px;
+        }
+        @media screen and (max-width: 1650px) {
+            font-size: 36px;
+        }
+        @media screen and (max-width: 1350px) {
+            font-size: 30px;
+            grid-column: 1/10;
+        }
+        @media screen and (max-width: 1350px) {
+            grid-column: 1/12;
+        }
+        @media screen and (max-width: 760px) {
+            grid-column: 1/13;
+            text-align: center;
+            font-size: 27px;
+        }
+        @media screen and (max-width: 575px) {
+            font-size: 23px;
+        }
     }
     &--roles {
         font-family: futura-pt-condensed, sans-serif;
@@ -56,6 +122,27 @@
         grid-row: 3/4;
         text-align: right;
 
+        @media screen and (max-width: 1850px) {
+            font-size: 28px;
+        }
+        @media screen and (max-width: 1650px) {
+            font-size: 23px;
+        }
+        @media screen and (max-width: 1350px) {
+            font-size: 21px;
+            grid-column: 3/10;
+        }
+        @media screen and (max-width: 1350px) {
+            grid-column: 1/12;
+        }
+        @media screen and (max-width: 760px) {
+            grid-column: 1/13;
+            text-align: center;
+            font-size: 19px;
+        }
+        @media screen and (max-width: 575px) {
+            font-size: 20px;
+        }
     }
 
     &--form {
@@ -104,7 +191,7 @@
                 color: $bleach;
                 font-size: 20px;
                 padding: 12.5px 40px;
-                margin: 5.5px;
+                margin: 7px;
                 border-radius: 14px;
                 cursor: pointer;
                 box-shadow: inset 0 -4px 12px rgba(black, .21);
@@ -150,6 +237,197 @@
                 &:active {
                     transform: scale(1.01);
                 }
+            }
+        }
+
+        @media screen and (max-width: 1850px) {
+            &--wrapper {
+                padding: 32.5px calc(100vw / 8) 32.5px 60px;
+                margin-top: 75px;
+
+                p {
+                    font-size: 21px;
+                }
+            }
+            &--title {
+                font-size: 24px;
+
+            }
+            &--options {
+                width: 52%;
+            }
+            &--submit {
+
+                a {
+                    font-size: 24px;
+                    padding: 18px 40px;
+                }
+            }
+        }
+
+        @media screen and (max-width: 1450px) {
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            &--wrapper {
+                padding: 35px calc(50vw / 8) 35px 35px;
+                margin-top: 75px;
+                grid-column: 5/13;
+
+                p {
+                    font-size: 19px;
+                    margin: 15px 0 10px 0;
+                }
+            }
+            &--title {
+                font-size: 22px;
+            }
+            &--options {
+                width: 100%;
+                button {
+                    font-size: 19px;
+                    padding: 15px 35px;
+                }
+            }
+            &--submit {
+                align-self: flex-start;
+                a {
+                    font-size: 24px;
+                    padding: 18px 40px;
+                    margin-top: 25px;
+                }
+            }
+        }
+        @media screen and (max-width: 1350px) {
+
+            &--wrapper {
+                background: linear-gradient(to bottom, rgba($tomato, 1) 0%, rgba($tomato, .85) 30%, rgba($tomato, 0) 65%);
+                align-items: center;
+                grid-column: 2/10;
+            }
+            &--submit {
+                align-self: flex-start;
+                a {
+                    font-size: 24px;
+                    padding: 18px 40px;
+                    margin-top: 25px;
+                    box-shadow: 0 -6px 20px rgba($brown, .41);
+
+                }
+            }
+        }
+        @media screen and (max-width: 1200px) {
+
+            &--wrapper {
+                padding: 35px 55px;
+                grid-column: 2/10;
+
+                p {
+                    text-align: center;
+                }
+            }
+            &--title {
+                text-align: center;            
+            }
+            &--options {
+                width: 100%;
+                justify-content: center;
+                button {
+                    font-size: 19px;
+                    padding: 15px 35px;
+                }
+            }
+            &--submit {
+                align-self: center;
+                a {
+                    font-size: 24px;
+                    padding: 18px 40px;
+                    margin-top: 25px;
+                    box-shadow: 0 -6px 20px rgba($brown, .41);
+
+                }
+            }
+        }
+        @media screen and (max-width: 1050px) {
+
+            &--wrapper {
+                grid-column: 1/11;
+            }
+            &--title {
+                font-size: 20px;           
+            }
+            &--options {
+                width: 100%;
+                justify-content: center;
+                button {
+                    font-size: 19px;
+                    padding: 15px 35px;
+                }
+            }
+            &--submit {
+                align-self: center;
+                a {
+                    font-size: 20px;
+                }
+            }
+        }
+        @media screen and (max-width: 1050px) {
+
+            &--wrapper {
+                grid-column: 0/12;
+            }
+            &--title {
+                font-size: 19px;
+            }
+            &--options {
+                width: 100%;
+                justify-content: center;
+                button {
+                    font-size: 19px;
+                    padding: 15px 35px;
+                }
+            }
+            &--submit {
+                align-self: center;
+                a {
+                    font-size: 19px;
+                }
+            }
+        }
+        @media screen and (max-width: 630px) {
+            &--wrapper {
+                margin-top: 25px;                
+                padding: 25px;
+
+                p {
+                    margin: 5px 0 0;
+                }
+            }
+            &--title {
+                font-size: 18px;
+            }
+            &--options {
+
+                button {
+                    font-size: 18px;
+                    padding: 12.5px 25px;
+                }
+            }
+            &--submit {
+                align-self: center;
+                width: 70%;
+                text-align: center;
+                a {
+                    font-size: 17px;
+                }
+            }
+        }
+        @media screen and (max-width: 500px) {
+            &--wrapper {
+                width: 100%;
+            }
+            &--submit {
+                width: 85%;
             }
         }
 

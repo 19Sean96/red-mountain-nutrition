@@ -16,9 +16,6 @@ const Header = () => {
                            <a>Schedule</a>
                        </Link>
                        <Link href="/">
-                           <a>Locations</a>
-                       </Link>
-                       <Link href="/">
                            <a>About</a>
                        </Link>
                        <Link href="/">
