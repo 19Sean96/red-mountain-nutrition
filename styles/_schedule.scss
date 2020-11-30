@@ -38,26 +38,25 @@
 		margin-bottom: 60px;
 		text-transform: capitalize;
 		color: $brown;
+
+		@media screen and (max-width: 1250px) {
+			font-size: 64px;
+			margin-bottom: 50px;
+		}
+		@media screen and (max-width: 850px) {
+			font-size: 48px;
+			margin-bottom: 40px;
+		}
+		@media screen and (max-width: 505px) {
+			font-size: 36px;
+			margin-top: 110px;
+		}
 	}
 	&__step-1 {
 		display: flex;
 		justify-content: space-between;
 
-		@media screen and (max-width: 1775px) {
-			flex-direction: column;
-		}
 
-		@media screen and (max-width: 1465px) {
-			&--title {
-				text-align: center;
-			}
-			&__focus {
-				margin: 0 auto 50px;
-			}
-			&__packages {
-				margin: auto;
-			}
-		}
 
 		&--title {
 			text-transform: capitalize;
@@ -286,6 +285,52 @@
 						background-color: $bleach;
 					}
 				}
+				@media screen and (max-width: 1250px) {
+					margin: 10px 5px;
+					&::before {
+						border: 3px rgba($grass, 0) solid;
+						width: calc(100% + 10px);
+						height: calc(100% + 10px);
+					}
+					&__active {
+						&::before {
+							border-color: $grass;
+						}
+					}
+					&--head {
+
+						h4 {
+							font-size: 29px;
+						}
+						h5 {
+							font-size: 20px;
+						}
+					}
+					&--body {
+						padding: 10px 12.5px 10px 15px;
+
+						ul {
+							li {
+								font-size: 18px;
+							}
+						}
+					}
+
+					&__premium {
+						margin-left: auto;
+					}
+				}
+				@media screen and (max-width: 650px) {
+					&--head {
+						padding: 14px 18px;
+						h4 {
+							font-size: 24px;
+						}
+						h5 {
+							font-size: 18px;
+						}
+					}
+				}
 			}
 			&--options {
 				display: flex;
@@ -353,6 +398,63 @@
 			font-style: normal;
 			font-size: 24px;
 			cursor: pointer;
+		}
+
+		@media screen and (max-width: 1775px) {
+			flex-direction: column;
+		}
+
+		@media screen and (max-width: 1465px) {
+			&--title {
+				text-align: center;
+			}
+			&__focus {
+				margin: 0 auto 50px;
+			}
+			&__packages {
+				margin: auto;
+			}
+		}
+
+		@media screen and (max-width: 1250px) {
+			&--title {
+				font-size: 24px;
+			}
+			&__focus {
+				margin-bottom: 35px;
+
+				&--options {
+					button {
+						font-size: 18px;
+					}
+				}
+			}
+		}
+		@media screen and (max-width: 850px) {
+			&--title {
+				font-size: 22px;
+			}
+			&__focus {
+				&--options {
+					button {
+						padding: 12.5px 25px;
+						margin: 10px 12px;
+					}
+				}
+			}
+		}
+		@media screen and (max-width: 450px) {
+			&__focus {
+				&--options {
+					display: flex;
+					flex-wrap: wrap;
+					justify-content: center;
+					button {
+						padding: 12.5px 25px;
+						margin: 10px 12px;
+					}
+				}
+			}
 		}
 	}
 
