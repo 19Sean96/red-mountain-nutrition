@@ -11,7 +11,7 @@
 		),
         url(/perishables.jpg);
     background-size: cover;
-
+    margin-bottom: -10vh;
     @media screen and (max-width: 1350px) {
         background: linear-gradient(
 			to bottom,
@@ -27,6 +27,9 @@
     }
     @media screen and (max-width: 600px) {
         min-height: 105vh;
+    }
+    @media screen and (min-height: 950px) {
+        margin-bottom: -25vh;
     }
         
     &--inner {
