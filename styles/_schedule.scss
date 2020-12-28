@@ -212,10 +212,10 @@
 					padding-left: 15px;
 					padding-right: 12.5px;
 					p {
-						font-family: futura-pt, sans-serif;
-						font-weight: 400;
+						font-family: ambroise-firmin-std, serif;
+						font-weight: 800;
 						font-style: normal;
-						font-size: 19px;
+						font-size: 21px;
 						text-transform: capitalize;
 					}
 
@@ -225,10 +225,11 @@
 						flex-wrap: wrap;
 						li {
 							width: 45%;
-							font-family: ambroise-firmin-std, serif;
-							font-weight: 800;
+
+							font-family: futura-pt, sans-serif;
+							font-weight: 400;
 							font-style: normal;
-							font-size: 21px;
+							font-size: 19px;
 							text-transform: capitalize;
 						}
 					}
