@@ -35,7 +35,7 @@ export default function Schedule() {
 	const [date, setDate] = useState({
 		value: new Date(),
 		month: new Date().getMonth(),
-		year: new Date().getYear(),
+		year: new Date().getFullYear(),
 		actual: new Date().getDate(),
 	});
 	const [times, setTimes] = useState([]);
@@ -44,7 +44,7 @@ export default function Schedule() {
 		setDate({
 			value: date,
 			month: date.getMonth(),
-			year: date.getYear(),
+			year: date.getFullYear(),
 			actual: date.getDate(),
 		});
 	};
@@ -74,8 +74,8 @@ export default function Schedule() {
 		);
 		if (date && schedule) {
 			console.log(date);
-			const { month, actual } = date;
-			const availableTimes = schedule?.[month]?.[actual];
+			const { year, month, actual } = date;
+			const availableTimes = schedule?.[year]?.[month]?.[actual];
 			console.log(availableTimes);
 
 			setTimes(() => {

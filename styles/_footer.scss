@@ -1,0 +1,98 @@
+.footer {
+    min-height: 65vh;
+    overflow-x: hidden;
+	background: linear-gradient(
+			to bottom,
+			rgba($bleach, 1) 0%,
+			rgba($bleach, .79) 100%
+		),
+        url(/perishables.jpg);
+    background-size: cover;
+    display: flex;
+    align-items: flex-end;
+    overflow-x: hidden;
+    &__wrapper {
+        margin: 0 auto;
+        width: 65%;
+        max-width: 850px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: flex-end;
+
+
+        h5 {
+            text-transform: capitalize;
+            font-size: 34px;
+            font-family: futura-pt, sans-serif;
+        font-weight: 500;
+        font-style: normal;
+        color: $brown;
+        margin-bottom: 15px;
+        }
+        p {
+            text-transform: uppercase;
+            color: $brown-dark;
+            font-size: 21px;
+            font-family: futura-pt, sans-serif;
+            font-weight: 00;
+            margin-bottom: 5px;
+            a {
+                color: $brown-dark
+            }
+        }
+    }
+
+
+    &--disclosure {
+        width: 100%;
+        text-align: center;
+        margin-top: 160px;
+        margin-bottom: 40px;
+    }
+    
+    @media screen and (max-width: 950px) {
+        min-height: 50vh;
+
+        &__wrapper {
+            width: 80%;
+
+            h5 {
+                font-size: 28px;
+            }
+            p {
+                font-size: 20px;
+            }
+        }
+    }
+    @media screen and (max-width: 725px) {
+        min-height: 47.5vh;
+
+        &__wrapper {
+            width: 90%;
+
+            h5 {
+                font-size: 25px;
+            }
+            p {
+                font-size: 18px;
+            }
+        }
+    }
+    @media screen and (max-width: 575px) {
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: flex-end;
+        &--contact,
+        &--address {
+            width: 100%;
+            text-align: center;
+        }
+        &--contact {
+            margin-bottom: 40px;
+        }
+        &--disclosure {
+            margin-top: 130px;
+        }
+    }
+}

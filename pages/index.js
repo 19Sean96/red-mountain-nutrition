@@ -2,8 +2,9 @@ import Head from 'next/head'
 import Interface from '../components/Interface'
 import Landing from '../components/Landing/index'
 import LifestylePackages from '../components/LifestylePackages' 
-
+import Bio from '../components/Landing/bio'
 import { connectToDatabase } from '../util/mongodb'
+import Footer from '../components/Footer'
 
 export default function Home({ isConnected }) {
   return (
@@ -17,6 +18,8 @@ export default function Home({ isConnected }) {
       <Interface>
         <Landing />
         <LifestylePackages />
+        <Bio />
+        <Footer />
       </Interface>
     </>
   )

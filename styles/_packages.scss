@@ -2,7 +2,7 @@
 	text-align: center;
 	margin: 0 12.334vw 30px;
 	color: $brown;
-
+	overflow-x:hidden;
 	&--title {
 		font-size: 72px;
 		font-family: ambroise-std, serif;
@@ -11,6 +11,7 @@
 		text-transform: capitalize;
 		max-width: 1200px;
 		margin: 0 auto;
+		color: $brown-dark;
 	}
 
 	&--subtitle {
@@ -150,16 +151,30 @@
 			transform: translateX(-50%) scale(1.01);
 		}
 	}
-	&__jumpstart,
+	&__jumpstart {
+		background-color: $bleach-2;
+		color: $tomato-dark;
+		box-shadow: 0 10px 32px rgba($bleach-dark, .41);
+
+		hr {
+			background-color: $tomato-dark;
+		}
+		a {
+			background-color: $tomato-dark;
+			color: $bleach-1;
+		}
+	}
 	&__premium {
-		background-color: $brown;
+		background-color: $brown-dark;
+		box-shadow: 0 10px 32px rgba($brown-dark, .31);
 
 		a {
 			color: $brown;
 		}
 	}
 	&__standard {
-		background-color: $tomato;
+		background-color: $tomato-dark;
+		box-shadow: 0 10px 32px rgba($tomato-dark, .31);
 
 		a {
 			color: $tomato;
