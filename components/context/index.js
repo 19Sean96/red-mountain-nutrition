@@ -30,12 +30,15 @@ export default function Provider ({ children }) {
 
 	const [ user, setUser] = useState()
 
+	const [ URL, setURL ] = useState()
+
 	useEffect(() => {
 
 		if (router.pathname.includes('/schedule/')) {
 			setActiveStep(router.pathname.replace('/schedule/', ''))
 		}
-
+		console.log(window.location.host);
+		setURL(window.location.host)
 	}, [router ])
 
 	const getCustomerID = async data => {
@@ -54,7 +57,8 @@ export default function Provider ({ children }) {
             activeFocus,
 			activePackage,
 			customer,
-			activeTime
+			activeTime,
+			URL
         }
         const response = await fetch("/api/createCheckoutSession", {
             method: "POST",
@@ -100,6 +104,7 @@ export default function Provider ({ children }) {
 				user,
 				setUser,
 				checkoutSessionID,
+				URL
 			}}
 		>
 			{children}

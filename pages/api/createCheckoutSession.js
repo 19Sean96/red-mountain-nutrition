@@ -4,8 +4,8 @@ const stripe = require('stripe')('sk_test_51Hm93zGsw55hWpg0gKzN0LcpuZPovCBS0sq4a
 
 const capitalize = str => str.charAt(0).toUpperCase() + str.slice(1)
 export default async (req,res) => {
-    const { activePackage, activeFocus, customer, activeTime} = req.body
-    console.log("ACTIVE TIME: ", activeTime);
+    const { activePackage, activeFocus, customer, activeTime, URL} = req.body
+    console.log("URL: ", URL);
     let desc = ''
 
     for (const focus in activeFocus) {
@@ -48,8 +48,8 @@ export default async (req,res) => {
             }
         ],
         mode: 'payment',
-        success_url: 'http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID}',
-        cancel_url: 'http://localhost:3000/cancel'
+        success_url: `${URL}/success?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${URL}/cancel`
     });
     console.log(session);
     res.statusCode = 200;
