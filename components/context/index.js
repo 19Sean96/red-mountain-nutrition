@@ -37,8 +37,8 @@ export default function Provider ({ children }) {
 		if (router.pathname.includes('/schedule/')) {
 			setActiveStep(router.pathname.replace('/schedule/', ''))
 		}
-		console.log(window.location.href);
-		setURL(window.location.href)
+		console.log(window.location.origin);
+		setURL(window.location.origin)
 	}, [router ])
 
 	const getCustomerID = async data => {
