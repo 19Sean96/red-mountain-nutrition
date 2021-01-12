@@ -20,6 +20,8 @@
         &--inner {
             flex-direction: column;
             height: 20vh;
+            max-height: 160px;
+            min-height: 150px;
         }
     }
 }

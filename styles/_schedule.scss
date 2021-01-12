@@ -225,7 +225,7 @@
 						flex-wrap: wrap;
 						li {
 							width: 45%;
-
+							margin-right: 5px;
 							font-family: futura-pt, sans-serif;
 							font-weight: 400;
 							font-style: normal;
@@ -329,6 +329,35 @@
 						}
 						h5 {
 							font-size: 18px;
+						}
+					}
+				}
+
+				@media screen and (max-width: 500px) {
+					flex-direction: column;
+
+					&--head {
+						width: 50%;
+						text-align: center;
+						padding: 14px 6px;
+						&::before {
+							top: 100%;
+							right: 0;
+							width: 100%;
+							height: 2px;
+						}
+
+						h4 {
+							font-size: 21px;
+						}
+						h5 {
+							font-size: 17px;
+						}
+					}
+					&--body {
+						p {
+							font-size: 19px;
+							text-align: center;
 						}
 					}
 				}
