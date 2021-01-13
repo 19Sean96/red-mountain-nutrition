@@ -683,7 +683,7 @@
 			font-family: futura-pt, sans-serif;
 			font-weight: 600;
 			font-style: normal;
-			font-size: 38px;
+			font-size: 34px;
 			color: #7a4e35;
 			margin-bottom: 40px;
 		}
@@ -747,6 +747,28 @@
 			}
 			.valid {
 				border-color: rgb(47, 194, 28);
+			}
+		}
+		@media screen and (max-width: 1100px) {
+			&--title {
+				font-size: 28px;
+			}
+			&--form {
+				width: 72.5%;
+			}
+		}
+		@media screen and (max-width: 600px) {
+			&--title {
+				font-size: 24px;
+			}
+			&--form {
+				width: 85%;
+			}
+		}
+		@media screen and (max-width: 475px) {
+
+			&--form {
+				width: 95%;
 			}
 		}
 	}
@@ -826,7 +848,7 @@
 	height: 85px;
 	width: 1600px;
 	max-width: 92%;
-
+	z-index: 1000;
 	display: flex;
 	justify-content: space-between;
 	font-family: ambroise-firmin-std, serif;
