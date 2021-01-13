@@ -32,6 +32,10 @@ export default function Schedule() {
 	const { handleCheckoutEnter, activeTime, setActiveTime } = useContext(
 		CartContext
 	);
+	const [schedule, setSchedule] = useState();
+	const [isMobile, setIsMobile] = useState();
+	const [mobileModelOpen, setMobileModelOpen] = useState(false);
+
 	const [date, setDate] = useState({
 		value: new Date(),
 		month: new Date().getMonth(),
@@ -40,7 +44,7 @@ export default function Schedule() {
 	});
 	const [times, setTimes] = useState([]);
 	const onChange = (date) => {
-		console.log(date);
+		console.log(date, " WAS CLICKED");
 		setDate({
 			value: date,
 			month: date.getMonth(),
@@ -49,8 +53,24 @@ export default function Schedule() {
 		});
 	};
 
-	const [schedule, setSchedule] = useState();
+	const onClickDay = (value) => setMobileModelOpen(true)
 
+
+	useEffect(() => {
+		function handleResize() {
+			if (window.innerWidth < 1000) {
+				console.log(window.innerWidth);
+
+				!isMobile && setIsMobile(true);
+			} else {
+				isMobile && setIsMobile(false);
+			}
+		}
+		handleResize()
+		window.addEventListener("resize", handleResize);
+
+		return (_) => window.removeEventListener("resize", handleResize);
+	});
 	useEffect(async () => {
 		const body = {
 			isOpen: true,
@@ -69,9 +89,7 @@ export default function Schedule() {
 	}, []);
 
 	useEffect(() => {
-		console.log(
-			"the date has been changed or the calendar has been manipulated"
-		);
+		console.log(times);
 		if (date && schedule) {
 			console.log(date);
 			const { year, month, actual } = date;
@@ -113,6 +131,8 @@ export default function Schedule() {
 		}
 	}, [activeTime]);
 
+
+
 	return (
 		<>
 			<Head>
@@ -139,16 +159,21 @@ export default function Schedule() {
 							<div className="calendar--dates">
 								<Calendar
 									onChange={onChange}
+									onClickDay={onClickDay}
 									value={date.value}
 								/>
 							</div>
-							<ScheduleModal
-								date={date}
-								times={times}
-								activeTime={activeTime}
-								setActiveTime={setActiveTime}
-								type="open"
-							/>
+							{(!isMobile ||
+								(isMobile && mobileModelOpen)) && (
+									<ScheduleModal
+										date={date}
+										times={times}
+										activeTime={activeTime}
+										setActiveTime={setActiveTime}
+										setMobileModelOpen={setMobileModelOpen}
+										type="open"
+									/>
+								)}
 						</div>
 					</ScheduleInterface>
 				</section>

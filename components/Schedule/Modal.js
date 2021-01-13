@@ -1,9 +1,19 @@
 import { CartContext } from "../context";
 import { useContext, useEffect, useState, useRef, createRef } from "react";
 import { Scrollbars } from "react-custom-scrollbars";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 export default function ScheduleModal(props) {
 	const [buttonRefs, setButtonRefs] = useState([]);
-	const { date, times, activeTime, setActiveTime, type } = props;
+	const {
+		date,
+		times,
+		activeTime,
+		setActiveTime,
+		type,
+		setMobileModelOpen,
+	} = props;
+	const [isMobile, setIsMobile] = useState();
 
 	useEffect(() => {
 		const timesLength = times && times.length;
@@ -18,10 +28,40 @@ export default function ScheduleModal(props) {
 		}
 	}, [times]);
 
+	useEffect(() => {
+		function handleResize() {
+			if (window.innerWidth < 950) {
+				console.log(window.innerWidth);
+
+				!isMobile && setIsMobile(true);
+			} else {
+				isMobile && setIsMobile(false);
+			}
+		}
+		handleResize();
+
+		window.addEventListener("resize", handleResize);
+
+		return (_) => window.removeEventListener("resize", handleResize);
+	});
+
 	return (
 		<section className="schedule--modal">
 			<h3 className="schedule--modal--title">
-				Available times on <br></br> {date.value.toDateString()}
+				<span>
+					Available times on {!isMobile && <br></br>}{" "}
+					{date.value.toDateString()}
+				</span>
+				{isMobile && (
+					<button
+						className="schedule--modal__back-btn"
+						onClick={(e) => setMobileModelOpen(false)}
+					>
+						<span>
+							calendar <FontAwesomeIcon icon="calendar-alt" />
+						</span>
+					</button>
+				)}
 			</h3>
 			<ul className="schedule--modal--list">
 				<Scrollbars

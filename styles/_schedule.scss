@@ -21,8 +21,11 @@
 		@media screen and (max-width: 1465px) {
 			width: 72.5%;
 		}
-		@media screen and (max-width: 920px) {
-			width: 82.5%;
+		@media screen and (max-width: 1465px) {
+			width: 85%;
+		}
+		@media screen and (max-width: 1050px) {
+			width: 92.5%;
 		}
 		@media screen and (max-width: 810px) {
 			width: 95%;
@@ -504,6 +507,8 @@
 			font-weight: 400;
 			font-style: normal;
 			font-size: 24px;
+
+			position: relative;
 		}
 
 		&--list {
@@ -586,6 +591,41 @@
 				}
 			}
 		}
+
+		&__back-btn {
+			position: absolute;
+			top: 10px;
+			left: 10px;
+			font-size: 18px;
+			text-transform: capitalize;
+			font-family: futura-pt, sans-serif;
+			padding: 10px 15px;
+			box-shadow: inset 2px 3px 36px rgba($tomato-dark, .46);
+			border: none;
+			border-radius: 10px;
+			background-color: $tomato;
+			color: $bleach;
+			svg {
+				margin-left: 7.5px;
+				color: $tomato-2;
+			}
+		}
+
+		@media screen and (max-width: 950px) {
+			position: absolute;
+			min-width: 300px;
+			width: 75%;
+			min-height: 400px;
+			&--title {
+				padding: 58px 10px 16px;
+			}
+		}
+		@media screen and (max-width: 800px){
+			width: 85%;
+		}
+		@media screen and (max-width: 500px){
+			width: 97.5%;
+		}
 	}
 
 	&--calendar {
@@ -596,7 +636,7 @@
 			font-family: futura-pt, sans-serif;
 			font-weight: 600;
 			font-style: normal;
-			font-size: 38px;
+			font-size: 32px;
 			color: #7a4e35;
 			margin-bottom: 40px;
 		}
@@ -604,9 +644,30 @@
 			display: flex;
 			justify-content: space-evenly;
 			align-items: stretch;
+			position: relative;
 			.calendar {
 				&--dates {
 					width: min-content;
+					display: flex;
+					justify-content: center;
+				}
+			}
+		}
+		@media screen and (max-width: 1250px) {
+			&--title {
+
+				font-size: 27px;
+			}
+		}
+		@media screen and (max-width: 950px) {
+
+			&--content {
+				.calendar {
+					&--dates {
+						width: max-content;
+						height: 400px;
+
+					}
 				}
 			}
 		}
@@ -743,6 +804,17 @@
 		&--range {
 			background: $tomato !important;
 		}
+	}
+
+	@media screen and (max-width: 950px) {
+		min-width: 300px;
+		width: 75% !important;
+	}
+	@media screen and (max-width: 800px){
+		width: 85% !important;
+	}
+	@media screen and (max-width: 500px){
+		width: 97.5% !important;
 	}
 }
 
