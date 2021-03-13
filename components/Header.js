@@ -7,7 +7,7 @@ const Header = () => {
             <div className="header--inner">
                 <Link href="/">
                 <div className="logo--wrapper">
-                    <Logo />
+                    <img src="/logo-icon.svg" alt="Red Mountain Nutrition Logo" className="logo"/>
                 </div>
                 </Link>
                 <div className="nav--wrapper">
