@@ -8,7 +8,6 @@ import { CartContext } from "../../components/context";
 
 export default function Admin({ isConnected }) {
 	const router = useRouter();
-	console.log(router);
 	const { user, setUser } = useContext(CartContext);
 	const { register, handleSubmit } = useForm();
 	const [loggedIn, logIn] = useState(false);
@@ -97,7 +96,6 @@ export default function Admin({ isConnected }) {
 
 export async function getServerSideProps(context) {
 	const { client } = await connectToDatabase();
-	console.log(process.env);
 
 	const isConnected = await client.isConnected(); // Returns true or false
 

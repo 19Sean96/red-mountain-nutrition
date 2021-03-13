@@ -492,7 +492,6 @@ function TimeCard({ time, type, handleRemoveTime, index = null }) {
 
 export async function getServerSideProps(context) {
 	const { client } = await connectToDatabase();
-	console.log(process.env);
 
 	const isConnected = await client.isConnected(); // Returns true or false
 

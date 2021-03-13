@@ -26,7 +26,6 @@ export default function StepCounter({ watchCustInputs, validated }) {
 			<div className="step-counter__watcher">
 				{stepInfo.map((step) => {
 					const x = parseInt(activeStep);
-					// console.log(step.num, parseInt(activeStep));
 
 					let stepType =
 						step.num < x

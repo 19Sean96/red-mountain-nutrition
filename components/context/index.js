@@ -37,12 +37,10 @@ export default function Provider ({ children }) {
 		if (router.pathname.includes('/schedule/')) {
 			setActiveStep(router.pathname.replace('/schedule/', ''))
 		}
-		console.log(window.location.origin);
 		setURL(window.location.origin)
 	}, [router ])
 
 	const getCustomerID = async data => {
-		console.log(data);
 		const response = await fetch('/api/createCustomer', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json'},
@@ -71,7 +69,6 @@ export default function Provider ({ children }) {
 	}
 
     const handleCheckoutEnter = async (event, customer, time) => {
-		console.log(customer);
         const stripe = await stripePromise;
 	
 		const customerID = await getCustomerID(customer)

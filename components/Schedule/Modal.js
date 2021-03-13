@@ -17,7 +17,6 @@ export default function ScheduleModal(props) {
 
 	useEffect(() => {
 		const timesLength = times && times.length;
-		console.log(timesLength);
 
 		if (timesLength) {
 			setButtonRefs((buttonRefs) =>
@@ -31,7 +30,6 @@ export default function ScheduleModal(props) {
 	useEffect(() => {
 		function handleResize() {
 			if (window.innerWidth < 950) {
-				console.log(window.innerWidth);
 
 				!isMobile && setIsMobile(true);
 			} else {
@@ -73,7 +71,6 @@ export default function ScheduleModal(props) {
 				>
 					{times.length > 0 ? (
 						times.map((time, i) => {
-							console.log(times);
 							if (time.minute === 0) {
 								time.minute = "00";
 							}

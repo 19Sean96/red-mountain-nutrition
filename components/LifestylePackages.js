@@ -43,7 +43,6 @@ const LifestylePackages = (props) => {
 	useEffect(() => {
 		function handleResize() {
 			if (window.innerWidth < 700) {
-				console.log(window.innerWidth);
 
 				!isMobile && setIsMobile(true);
 			} else {
@@ -81,7 +80,6 @@ const LifestylePackages = (props) => {
 								className={`package--types__jumpstart ${activeType === 0 ? 'active__jumpstart': 0}`}
 								onClick={(e) =>
 									setActiveType(() => {
-										console.log("jumpstart");
 										return 0;
 									})
 								}
@@ -92,7 +90,6 @@ const LifestylePackages = (props) => {
 								className={`package--types__standard ${activeType === 1 ? 'active__standard': ''}`}
 								onClick={(e) =>
 									setActiveType(() => {
-										console.log("standard");
 										return 1;
 									})
 								}
@@ -103,7 +100,6 @@ const LifestylePackages = (props) => {
 								className={`package--types__premium ${activeType === 2 ? 'active__premium': ''}`}
 								onClick={(e) =>
 									setActiveType(() => {
-										console.log("premium");
 										return 2;
 									})
 								}
