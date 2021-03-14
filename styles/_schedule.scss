@@ -114,7 +114,7 @@
 					color: $brown;
 
 					&::before {
-						border-color: $grass;
+						border-color: $success;
 						transition: all 0.1s;
 					}
 				}
@@ -137,27 +137,27 @@
 				transition: all 0.15s ease-in-out;
 				outline: none;
 
-				&::before {
-					position: absolute;
-					content: "";
-					top: 50%;
-					left: 50%;
-					transform: translate(-50%, -50%);
-					width: calc(100% + 15px);
-					height: calc(100% + 15px);
-					border: 5px rgba($grass, 0) solid;
-					border-radius: 15px;
-					transition: all 0.1s;
-				}
+				// &::before {
+				// 	position: absolute;
+				// 	content: "";
+				// 	top: 50%;
+				// 	left: 50%;
+				// 	transform: translate(-50%, -50%);
+				// 	width: calc(100% + 15px);
+				// 	height: calc(100% + 15px);
+				// 	border: 5px rgba($success, 0) solid;
+				// 	border-radius: 15px;
+				// 	transition: all 0.1s;
+				// }
 
 				&__active {
 					transform: scale(1.025);
 					box-shadow: 0 8px 19px rgba($grass, 0.27);
 
-					&::before {
-						border-color: $grass;
-						transition: all 0.1s;
-					}
+					// &::before {
+					// 	border-color: $success;
+					// 	transition: all 0.1s;
+					// }
 				}
 
 				&:hover {
@@ -289,16 +289,29 @@
 						background-color: $bleach;
 					}
 				}
+				&--selected {
+					position: absolute;
+					right: 0;
+					top: 0;
+					background-color: #efefef;
+					color: $success;
+					padding: 10px;
+					border-radius: 50%;
+					box-shadow: 0 0 12px rgba(0,0,0,.11);
+					border: $success solid 3px;
+					font-size: 16px;
+					transform: translate(-10%, -35%);
+				}
 				@media screen and (max-width: 1250px) {
 					margin: 10px 5px;
 					&::before {
-						border: 3px rgba($grass, 0) solid;
+						border: 3px rgba($success, 0) solid;
 						width: calc(100% + 10px);
 						height: calc(100% + 10px);
 					}
 					&__active {
 						&::before {
-							border-color: $grass;
+							border-color: $success;
 						}
 					}
 					&--head {
@@ -492,10 +505,27 @@
 	}
 
 	&--modal {
-		box-shadow: 0 5px 15px rgba(black, 0.26);
+		position: relative;
+		box-shadow: 0 5px 15px rgba($tomato, 0.26);
 		background-color: rgba($tomato, 0.95);
 		width: 300px;
 		border-radius: 6px;
+
+		#goBack {
+			position: absolute;
+			left: 50%;
+			bottom: 0;
+			font-size: 18px;
+			font-family: futura-pt, sans-serif;
+			padding: 10px 35px;
+			box-shadow: 2px 3px 36px rgba($tomato-dark, .46);
+			border: none;
+			border-radius: 10px;
+			background-color: $bleach;
+			transform: translate(-50%, 66%);
+			cursor: pointer;
+			color: $brown-dark;
+		}
 
 		&--title {
 			text-align: center;
@@ -969,7 +999,7 @@
 	z-index: 1000;
 	display: flex;
 	justify-content: space-between;
-	font-family: ambroise-firmin-std, serif;
+	font-family: futura-pt, serif;
 	font-weight: 400;
 	font-style: normal;
 	font-size: 26px;

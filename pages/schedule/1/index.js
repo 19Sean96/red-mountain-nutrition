@@ -4,8 +4,11 @@ import Head from "next/head";
 import Link from "next/link";
 import { CartContext } from "../../../components/context";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import Interface from "../../../components/Interface";
 import ScheduleInterface from "../../../components/Schedule/Interface";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 function PackageOption(props) {
 	const { setActivePackage, activePackage } = useContext(CartContext);
@@ -33,6 +36,11 @@ function PackageOption(props) {
 					))}
 				</ul>
 			</div>
+			{activePackage.name === props.name && (
+				<div className="option--selected">
+					<FontAwesomeIcon icon={faCheck} />
+				</div>
+			)}
 		</button>
 	);
 }
@@ -171,7 +179,6 @@ export default function Schedule() {
 								</div>
 							</div>
 						</div>
-
 					</ScheduleInterface>
 				</section>
 			</Interface>

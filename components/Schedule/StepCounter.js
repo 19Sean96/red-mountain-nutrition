@@ -20,7 +20,12 @@ export default function StepCounter({ watchCustInputs, validated }) {
 			name: "make payment",
 		},
 	];
-	const { activeStep, handleCheckoutEnter } = useContext(CartContext);
+	const {
+		activeStep,
+		handleCheckoutEnter,
+		activePackage,
+		activeTime,
+	} = useContext(CartContext);
 	return (
 		<aside className="step-counter">
 			<div className="step-counter__watcher">
@@ -42,21 +47,37 @@ export default function StepCounter({ watchCustInputs, validated }) {
 			</div>
 			{activeStep && (
 				<div className="step-counter__next">
-					{activeStep < 3 ? (
-						<Link href={`/schedule/${parseInt(activeStep) + 1}`}>
+					{activeStep == 1 && (
+						<Link href="/schedule/2">
 							<a>
-								<span>
-									{stepInfo[activeStep].num +
-										". " +
-										stepInfo[activeStep].name}
-								</span>
+								<span>2. Schedule</span>
 							</a>
 						</Link>
-					) : (
-						<a onClick={e => {
-                            console.log(watchCustInputs)
-                            validated ? handleCheckoutEnter(e, watchCustInputs) : alert('Please enter all required information')
-                        }}>
+					)}
+					{activeStep == 2 && (
+						<Link href={activeTime ? "/schedule/3" : "#"}>
+							<a
+								onClick={(e) => {
+									if (!activeTime) {
+										alert("Please select a date & time.")
+									}
+								}}
+							>
+								<span>3. contact info</span>
+							</a>
+						</Link>
+					)}
+					{activeStep == 3 && (
+						<a
+							onClick={(e) => {
+								console.log(watchCustInputs);
+								validated
+									? handleCheckoutEnter(e, watchCustInputs)
+									: alert(
+											"Please enter all required information"
+									  );
+							}}
+						>
 							<span>
 								{stepInfo[activeStep].num +
 									". " +

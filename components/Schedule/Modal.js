@@ -2,6 +2,7 @@ import { CartContext } from "../context";
 import { useContext, useEffect, useState, useRef, createRef } from "react";
 import { Scrollbars } from "react-custom-scrollbars";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 export default function ScheduleModal(props) {
 	const [buttonRefs, setButtonRefs] = useState([]);
@@ -45,6 +46,10 @@ export default function ScheduleModal(props) {
 
 	return (
 		<section className="schedule--modal">
+			<button id="goBack" type="button" onClick={(e) => setMobileModelOpen(false)}>
+			<span>Back</span> <FontAwesomeIcon icon={faArrowLeft} />
+			</button>
+		
 			<h3 className="schedule--modal--title">
 				<span>
 					Available times on {!isMobile && <br></br>}{" "}
